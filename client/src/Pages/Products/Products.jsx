@@ -3,6 +3,7 @@ import styled from "styled-components";
 import ProductsSearch from "./ProductsSearch";
 import ProductsSort from "./ProductsSort";
 import ProductsTag from "./ProductsTag";
+import ProductsPagination from "./ProductsPagination";
 
 const Products = () => {
     return (
@@ -29,7 +30,7 @@ const Products = () => {
             </ProductsWrapper>
 
             <PaginationWrapper>
-
+                <ProductsPagination />
             </PaginationWrapper>
         </StyledProducts>
     )
@@ -86,6 +87,9 @@ const ProductsWrapper = styled.div`
 const PaginationWrapper = styled.div`
     width: 100%;
     height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `
 
 
