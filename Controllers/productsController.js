@@ -5,10 +5,17 @@ const handleError = (err) => {
     console.log(err);
 }
 
-exports.getProducts = async (req, res, next) => {
+exports.postProducts = async (req, res, next) => {
     try {
-        const data = await fs.readFile(path.resolve(__dirname, '../', 'db', 'products.json'))
-        res.send(JSON.parse(data))
+        const { price, tags, search } = req.body
+
+        let data = await fs.readFile(path.resolve(__dirname, '../', 'db', 'products.json'))
+        
+        data = JSON.parse(data)
+        
+        data = data.filter(product => tags.includes(product.tag))
+
+        res.send(data)
     } catch (err) {
         handleError(err)
     }

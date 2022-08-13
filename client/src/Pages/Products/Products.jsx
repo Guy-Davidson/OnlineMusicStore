@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "styled-components";
 
 import { GetProductsQuery } from "./ProductsAPI";
@@ -9,8 +10,13 @@ import ProductsPagination from "./ProductsPagination";
 import ProductCard from "./ProductCard";
 
 const Products = () => {
+    const [config, setConfig] = useState({
+        price: "ascending",
+        tags: ['organ', 'drum'],
+        search: ''
+    })
 
-    const products = GetProductsQuery({a:1})
+    const products = GetProductsQuery(config)
 
     return (
         <StyledProducts>
@@ -18,7 +24,7 @@ const Products = () => {
                 <ProductsSearch 
                     onChange={() => {console.log("onChange search")}}
                     />
-                <ProductsTag />
+                <ProductsTag config={config} setConfig={setConfig}/>
                 <ProductsSort />
             </HeaderWrapper>
 

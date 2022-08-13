@@ -4,7 +4,7 @@ const route = express.Router();
 
 const productsController = require('../Controllers/productsController')
 
-route.get('/', productsController.getProducts)
+route.post('/', productsController.postProducts)
 
 // route.post('/', recentsController.postRecents)
 
