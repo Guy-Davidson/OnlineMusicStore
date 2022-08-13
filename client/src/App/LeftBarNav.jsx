@@ -5,8 +5,6 @@ const LeftBarNav = (props) => {
     const { name, directTo, icon } = props
     const location  = useLocation() 
 
-    console.log(directTo);
-
     return (
         <Link 
             to={props.directTo}
