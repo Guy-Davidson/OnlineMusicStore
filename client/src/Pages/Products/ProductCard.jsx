@@ -8,9 +8,27 @@ const ProductCard = (props) => {
     return (
         <StyledProductCard>
             <ImageWrapper>
-                <ProductImage 
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmSayqb44PT85LKLa_MhcSJW1Su4FBJ5ZA4Q&usqp=CAU"
-                />
+                {[product.tag].map(tag => {
+                    let src = ''
+                    switch (tag) {
+                        case "guitar":
+                            src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmSayqb44PT85LKLa_MhcSJW1Su4FBJ5ZA4Q&usqp=CAU"
+                            break
+                        case "organ":
+                            src = "https://www.native-instruments.com/typo3temp/pics/img-tile-homepage-featured-products-keyboards-0c840e64b533dbb91c2ac1dca5883c37-m@2x.jpg"
+                            break
+                        case "drum":
+                            src = "https://www.rech-cymbals.com.au/wp-content/uploads/2019/05/Force-White-1618x1240.png"
+                            break
+                        }
+                    return (
+                        <ProductImage 
+                            key={`img-${product.id}`}
+                            src={src}
+                        />
+                    )
+                })}
+
             </ImageWrapper>
             <MidWrapper>
                 <TitleWrapper>
@@ -28,11 +46,11 @@ const ProductCard = (props) => {
                     {[product.tag].map(tag => {
                         switch (tag) {
                             case "guitar":
-                                return <GiGuitar size={'3rem'} color={'rgb(209, 0, 0, .9)'}/>
+                                return <GiGuitar key={`tag-${product.id}`} size={'3rem'} color={'rgb(209, 0, 0, .9)'}/>
                             case "organ":
-                                return <GiGrandPiano size={'3rem'} color={'rgb(90, 24, 154, 1)'}/>
+                                return <GiGrandPiano key={`tag-${product.id}`} size={'3rem'} color={'rgb(90, 24, 154, 1)'}/>
                             case "drum":
-                                return <GiDrumKit size={'3rem'} color={'rgb(0, 128, 0, 1)'}/>
+                                return <GiDrumKit key={`tag-${product.id}`} size={'3rem'} color={'rgb(0, 128, 0, 1)'}/>
                             }
                     })}
                 </TagWrapper>
@@ -49,7 +67,7 @@ const StyledProductCard = styled.div`
     background-color: ${props => props.theme.App.backgroundColor.card};
     background-color: #0a0012;
     box-shadow: 2px 10px 15px 2px rgb(256,256,256, .25);
-    padding: 2rem;
+    padding: 2rem 2rem 1rem 2rem;
     display: flex;
     flex-direction: column;
 
@@ -64,7 +82,9 @@ const ImageWrapper = styled.div`
 `
 
 const ProductImage = styled.img`    
-    width: 100%;        
+    width: 100%;   
+    height: 100%;
+    object-fit: scale-down;
 `
 
 const MidWrapper = styled.div`
