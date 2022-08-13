@@ -47,10 +47,10 @@ app.use((_, res, next) => {
 // app.use('/filings', filingsRouter)
 // app.use('/search', searchRouter)
 
-// app.use(express.static(path.resolve(__dirname, 'Client', 'build')))
-// app.get('*', (req, res) => {
-//   res.sendFile(path.resolve(__dirname, 'Client', 'build', 'index.html'))  
-// })
+app.use(express.static(path.resolve(__dirname, 'Client', 'build')))
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'Client', 'build', 'index.html'))  
+})
 
 const PORT = process.env.PORT || 5000
 
