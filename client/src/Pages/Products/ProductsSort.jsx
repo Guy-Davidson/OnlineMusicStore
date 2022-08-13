@@ -37,7 +37,6 @@ const ButtonWrapper = styled.div`
 
     ${props => {
         if(props.isActive) {
-            console.log("active in if");
             return css`
                 color: ${props => props.theme.App.fontColor.active};
             `

@@ -4,7 +4,8 @@ export const DarkTheme = {
             main: '#0d1117',
             secondary: '#282828',    
             tarinary: '#9a9a9c',
-            hover: 'rgb(196, 196, 196, .25)'
+            hover: 'rgb(196, 196, 196, .25)',
+            card: "#022b3a"
         },
         fontColor: {
             main: '#e5e5e6',     

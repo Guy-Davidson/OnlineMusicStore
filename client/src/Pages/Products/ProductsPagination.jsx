@@ -22,7 +22,7 @@ const StyledProductsPagination = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-size: 1.6rem;
+    font-size: 1.6rem; 
     width: 10%;
 `
 

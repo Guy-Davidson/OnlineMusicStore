@@ -1,0 +1,44 @@
+[
+    {
+        "id": "531adb84-62b4-4f8a-b0ab-b22cbcc9e65a",
+        "title": "Fender Telecaster",
+        "desc": "The American Professional II Telecaster® draws from more than seventy years of innovation, inspiration and evolution to meet the demands of today’s working player.",
+        "price": 1575,
+        "tag": "guitar"
+    },
+    {
+        "id": "531adb84-62b4-4f8a-b0ab-b22123c9e65a",
+        "title": "Fender Stratocaster",
+        "desc": "The American Professional II Stratocaster® Left-Hand draws from more than sixty years of innovation, inspiration and evolution to meet the demands of today’s working player.",
+        "price": 2450,
+        "tag": "organ"
+    },
+    {
+        "id": "kpfadb84-62b4-4f8a-b0ab-b22123c9e65a",
+        "title": "Gibson Les Paul",
+        "desc": "The new Les Paul Standard returns to the classic design that made it relevant, played and loved -- shaping sound across generations and genres of music.",
+        "price": 2150,
+        "tag": "drum"
+    },
+    {
+        "id": "kpfadb84-62b4-4f8a-b0ab-2j6123c9e65a",
+        "title": "Gibson SG",
+        "desc": "The SG™ Special returns to the classic design that made it relevant, played, and loved -- shaping sound across generations and genres of music. This early 60s style SG Special has the vibe and sound heard on countless classic rock recordings.",
+        "price": 1599,
+        "tag": "guitar"
+    },
+    {
+        "id": "kpfadb84-6111-4f8a-b0ab-2j6123c9e65a",
+        "title": "PRS CUSTOM 24",
+        "desc": "The Custom 24 Piezo is a 24-fret solidbody piezo-equipped guitar that effortlessly achieves classic humbucker tones and authentic acoustic sounds in one instrument.",
+        "price": 3850,
+        "tag": "guitar"
+    },
+    {
+        "id": "kpfadb84-6111-4f8a-b0ab-2j2223c9e65a",
+        "title": "PRS HOLLOWBODY II",
+        "desc": "The McCarty 594 Hollowbody II brings a new set of features to one of our most beloved models: the Hollowbody II. ",
+        "price": 5850,
+        "tag": "guitar"
+    }
+]

@@ -9,7 +9,7 @@ const path = require('path');
 // const filterByRouter = require('./Routes/filterByRouter')
 // const profilePropertyRouter = require('./Routes/profilePropertyRouter')
 
-// const favoritesRouter = require('./Routes/favoritesRouter')
+const productsRouter = require('./Routes/productsRouter')
 // const tabsRouter = require('./Routes/tabsRouter')
 // const recentsRouter = require('./Routes/recentsRouter')
 // const layoutsRouter = require('./Routes/layoutsRouter')
@@ -30,7 +30,7 @@ app.use((_, res, next) => {
     next();
   });
 
-// app.use('/favorites', favoritesRouter)  
+app.use('/products', productsRouter)  
 // app.use('/tabs', tabsRouter)  
 // app.use('/recents', recentsRouter)  
 // app.use('/layouts', layoutsRouter)  

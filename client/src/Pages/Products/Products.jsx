@@ -1,11 +1,17 @@
 import styled from "styled-components";
 
+import { GetProductsQuery } from "./ProductsAPI";
+
 import ProductsSearch from "./ProductsSearch";
 import ProductsSort from "./ProductsSort";
 import ProductsTag from "./ProductsTag";
 import ProductsPagination from "./ProductsPagination";
+import ProductCard from "./ProductCard";
 
 const Products = () => {
+
+    const products = GetProductsQuery({a:1})
+
     return (
         <StyledProducts>
             <HeaderWrapper>
@@ -17,14 +23,12 @@ const Products = () => {
             </HeaderWrapper>
 
             <ProductsWrapper>
-                {(new Array(100).fill(0)).map((elm, index) => {
+                {products.isSuccess && products.data.map(product => {
                     return (
-                        <div
-                            key={index}
-                            style={{width: '10px', height: '55px'}}
-                        >
-                            {index}
-                        </div>
+                        <ProductCard
+                            key={`product-${product.id}`}
+                            product={product}
+                        />
                     )
                 })}
             </ProductsWrapper>
@@ -57,9 +61,11 @@ const HeaderWrapper = styled.div`
 const ProductsWrapper = styled.div`
     width: 100%;
     height: 70vh;
+    padding: 0 2rem;
 
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 4rem;
 
     overflow-y: scroll;
 
@@ -73,7 +79,7 @@ const ProductsWrapper = styled.div`
         }
 
         ::-webkit-scrollbar-track {
-                background-color: transparent;                
+                background-color: transparent;                 
                 border-radius: 10px;                
         }
 
