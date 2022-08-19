@@ -2,16 +2,30 @@ import styled, { css } from "styled-components";
 
 import { BsArrowUp, BsArrowDown } from 'react-icons/bs';
 
-const ProductsSort = () => {
+const ProductsSort = (props) => {
+    const { config, setConfig } = props
+
     return (
         <StyledProductsSort>
             Price
-            <ButtonWrapper isActive={true}>
-                <BsArrowUp />
-            </ButtonWrapper>            
-            <ButtonWrapper>
+            <ButtonWrapper
+                isActive={config.price === 'descending'}
+                onClick={() => {
+                    config.price !== 'descending' &&
+                    setConfig(prev => { return({...prev, price: 'descending'})})
+                }}            
+            >
                 <BsArrowDown />
             </ButtonWrapper>              
+            <ButtonWrapper 
+                isActive={config.price === 'ascending'}
+                onClick={() => {
+                    config.price !== 'ascending' &&
+                    setConfig(prev => { return({...prev, price: 'ascending'})})
+                }}
+                >
+                <BsArrowUp />
+            </ButtonWrapper>                        
         </StyledProductsSort>
     )
 }
