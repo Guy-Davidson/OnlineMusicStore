@@ -5,7 +5,8 @@ export const DarkTheme = {
             secondary: '#282828',    
             tarinary: '#9a9a9c',
             hover: 'rgb(196, 196, 196, .25)',
-            card: "#022b3a"
+            card: "#022b3a",
+            cta: 'rgb(0, 154, 255, 1)',
         },
         fontColor: {
             main: '#e5e5e6',     

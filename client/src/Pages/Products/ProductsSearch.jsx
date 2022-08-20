@@ -8,10 +8,7 @@ const ProductsSearch = (props) => {
                 autoComplete="off"
                 onChange={props.onChange}   
                 autoFocus={true}                                                   
-                placeholder={'Search Our Products...'}                
-                // type={styling.type}                     
-                // onFocus={() => setIsFocused && setIsFocused(true)}                               
-                // onBlur={() => setIsFocused && setIsFocused(false)}                                       
+                placeholder={'Search Our Products...'}                                    
                 />   
         </StyledProductsSearch>
     )
@@ -33,7 +30,7 @@ const StyledProductsSearch = styled.div`
             line-height: normal;                    
             padding-left: .5rem;
 
-            color: inherit;
+            color: black;
             font-size: 1.6rem;
         }
 `

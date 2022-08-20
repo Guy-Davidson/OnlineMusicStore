@@ -11,9 +11,10 @@ import ProductCard from "./ProductCard";
 
 const Products = () => {
     const [config, setConfig] = useState({
-        price: "ascending",
-        tags: ['organ', 'drum'],
-        search: ''
+        price: "descending",
+        tags: ['guitar', 'organ', 'drum'],
+        search: '',
+        page: 1
     })
 
     const products = GetProductsQuery(config)
@@ -22,10 +23,10 @@ const Products = () => {
         <StyledProducts>
             <HeaderWrapper>
                 <ProductsSearch 
-                    onChange={() => {console.log("onChange search")}}
+                    onChange={(e) => {setConfig(prev => { return ({...prev, search: e.target.value})})}}
                     />
                 <ProductsTag config={config} setConfig={setConfig}/>
-                <ProductsSort />
+                <ProductsSort config={config} setConfig={setConfig}/>
             </HeaderWrapper>
 
             <ProductsWrapper>
@@ -40,7 +41,7 @@ const Products = () => {
             </ProductsWrapper>
 
             <PaginationWrapper>
-                <ProductsPagination />
+                <ProductsPagination config={config} setConfig={setConfig}/>
             </PaginationWrapper>
         </StyledProducts>
     )

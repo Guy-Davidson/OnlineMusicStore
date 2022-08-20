@@ -3,6 +3,7 @@ import { useNavigate } from 'react-location'
 
 import Contact from '../Pages/Contact/Contact'
 import Products from '../Pages/Products/Products'
+import Register from '../Pages/Register/Register'
 
 const Redirect = () => {
     const navigate = useNavigate()
@@ -54,7 +55,7 @@ export const routes = [
     },
     {
         path: '/register',
-        element: <div>register Page</div>   
+        element: <Register />
     },
     {
         path: '/login',

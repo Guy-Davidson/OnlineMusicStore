@@ -11,6 +11,7 @@ const path = require('path');
 
 const productsRouter = require('./Routes/productsRouter')
 const contactRouter = require('./Routes/contactRouter')
+const registerRouter = require('./Routes/registerRouter')
 // const tabsRouter = require('./Routes/tabsRouter')
 // const recentsRouter = require('./Routes/recentsRouter')
 // const layoutsRouter = require('./Routes/layoutsRouter')
@@ -33,7 +34,7 @@ app.use((_, res, next) => {
 
 app.use('/products', productsRouter)  
 app.use('/contact', contactRouter)
-// app.use('/tabs', tabsRouter)  
+app.use('/register', registerRouter)  
 // app.use('/recents', recentsRouter)  
 // app.use('/layouts', layoutsRouter)  
 // app.use('/templates', templatesRouter)  
