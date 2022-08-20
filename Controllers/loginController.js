@@ -5,9 +5,13 @@ const handleError = (err) => {
     console.log(err);
 }
 
-exports.postRegister = async (req, res, next) => {
+exports.postLogin = async (req, res, next) => {
     try {
-        const { userName, password, confirmPassword } = req.body
+        const { userName, password } = req.body
+
+        console.log(req.body);
+        res.send("ok")
+        return
 
         if(!Object.values(req.body).every(v => v)) {
             res.status(400).send('Invalid Fields')
@@ -33,6 +37,8 @@ exports.postRegister = async (req, res, next) => {
         await fs.writeFile(path.resolve(__dirname, '../', 'db', 'users.json'), JSON.stringify([...data, req.body]))
         
         res.status(200).send("ok")
+
+
 
     } catch (err) {
         handleError(err)

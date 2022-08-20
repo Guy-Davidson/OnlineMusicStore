@@ -1,23 +1,19 @@
 import styled, { css } from 'styled-components'
 import { useRef, useState } from 'react'
-import { PostRegister } from './RegisterAPI'
-import { AiOutlineCloseCircle } from 'react-icons/ai';
+import { PostLogin } from './LoginAPI'
 
-const Register = () => {
+const Login = () => {
     const [isActive, setIsActive] = useState(false)
     const [err, setErr] = useState(null)
 
     const inputRef = useRef({
         userName: null,
-        firstName: null,
-        lastName: null,
-        email: null,
         password: null,
-        confirmPassword: null
+        rememberMe: false
     })
 
     const getIsActive = () => {
-        if(Object.values(inputRef.current).every(v => v) !== isActive) {
+        if(Object.values(inputRef.current).every(v => v || typeof v === 'boolean') !== isActive) {
             setIsActive(!isActive)            
         }
     }
@@ -26,7 +22,7 @@ const Register = () => {
         if(!isActive) return
 
         try {
-            const res = await PostRegister(inputRef.current)
+            const res = await PostLogin(inputRef.current)
             console.log(res)
         } catch (error) {
             setErr(error.response.data)
@@ -35,7 +31,7 @@ const Register = () => {
     }
 
     return (
-        <StyledRegister>
+        <StyledLogin>
             <FormWrapper>
                 {fields.map(field => {
                     return (
@@ -52,13 +48,24 @@ const Register = () => {
                         </InputWrapper>
                     )
                 })}
+                <RememberMeWrapper>
+                    <Checkbox 
+                        type={'checkbox'}
+                        onChange={(e) => {
+                            inputRef.current["rememberMe"] = e.target.checked
+                            getIsActive() 
+                            setErr(null)
+                        }}
+                    />
+                    Remember Me
+                </RememberMeWrapper>
                 <CTA
                     onClick={handleCtaClick}
                     isActive={isActive}
                 >
-                    Register
+                    Login
                 </CTA>
-                {err && 
+                {/* {err && 
                     <ErrorWrapper>
                         <AiOutlineCloseCircle 
                             style={{marginRight: '1rem', color: "red"}}
@@ -66,13 +73,13 @@ const Register = () => {
                             />
                         {err}
                     </ErrorWrapper>
-                }
+                } */}
             </FormWrapper>
-        </StyledRegister>
+        </StyledLogin>
     )
 }
 
-const StyledRegister = styled.div`
+const StyledLogin = styled.div`
     height: 100%;
     width: 100%;
     display: flex;
@@ -111,6 +118,19 @@ const Input = styled.input`
     font-size: 1.6rem;
     margin-bottom: 1rem;
 `
+
+const RememberMeWrapper = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.3rem;
+    margin-top: 2rem;
+`
+
+const Checkbox = styled.input`
+    margin-right: 1rem;
+`
+
 const CTA = styled.div`
     font-size: 1.6rem;
     padding: .5rem 5rem;
@@ -133,15 +153,7 @@ const CTA = styled.div`
     }}
 `
 
-const ErrorWrapper = styled.div`
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.6rem;        
-`   
-
-export default Register
+export default Login
 
 const fields = [
     {
@@ -152,32 +164,8 @@ const fields = [
     },
     {
         id: '2',
-        title: 'First Name:',
-        name: 'firstName',
-        type: 'text'
-    },
-    {
-        id: '3',
-        title: 'Last Name:',
-        name: 'lastName',
-        type: 'text'
-    },
-    {
-        id: '4',
-        title: 'Email:',
-        name: 'email',
-        type: 'email'
-    },
-    {
-        id: '5',
         title: 'Password:',
         name: 'password',
-        type: 'password'
-    },
-    {
-        id: '6',
-        title: 'Confirm Password:',
-        name: 'confirmPassword',
         type: 'password'
     }
 ]
