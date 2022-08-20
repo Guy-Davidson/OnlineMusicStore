@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useNavigate } from 'react-location'
 
 import Products from '../Pages/Products/Products'
+import Register from '../Pages/Register/Register'
 
 const Redirect = () => {
     const navigate = useNavigate()
@@ -53,7 +54,7 @@ export const routes = [
     },
     {
         path: '/register',
-        element: <div>register Page</div>
+        element: <Register />
     },
     {
         path: '/login',
