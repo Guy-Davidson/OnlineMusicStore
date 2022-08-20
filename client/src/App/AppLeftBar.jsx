@@ -1,7 +1,7 @@
 import styled, { withTheme } from "styled-components"
 
 import { GiMusicSpell } from 'react-icons/gi';
-import { GrProductHunt } from 'react-icons/gr';
+import { GrProductHunt, GrMail } from 'react-icons/gr';
 import { IoBagCheckOutline } from 'react-icons/io5';
 import { RiAdminLine } from 'react-icons/ri';
 import { FiLogIn } from 'react-icons/fi';
@@ -124,9 +124,9 @@ const TopNavs = [
         icon: <GrProductHunt style={{marginRight: '1rem'}}/>
     },
     {
-        name: 'MyPage4',
-        directTo: '/mypage4',
-        icon: <GrProductHunt style={{marginRight: '1rem'}}/>
+        name: 'Contact',
+        directTo: '/contact',
+        icon: <GrMail style={{marginRight: '1rem'}}/>
     },
 ]
 

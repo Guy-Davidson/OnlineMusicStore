@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-location'
 
+import Contact from '../Pages/Contact/Contact'
 import Products from '../Pages/Products/Products'
 
 const Redirect = () => {
@@ -44,8 +45,8 @@ export const routes = [
         element: <div>mypage3 Page</div>
     },
     {
-        path: '/mypage4',
-        element: <div>mypage4 Page</div>
+        path: '/contact',
+        element: <Contact />
     },
     {
         path: '/admin',
@@ -53,7 +54,7 @@ export const routes = [
     },
     {
         path: '/register',
-        element: <div>register Page</div>
+        element: <div>register Page</div>   
     },
     {
         path: '/login',
