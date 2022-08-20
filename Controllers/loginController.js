@@ -7,7 +7,7 @@ const handleError = (err) => {
 
 exports.postLogin = async (req, res, next) => {
     try {
-        const { userName, password } = req.body
+        const { userName, password } = req.body        
 
         if(!Object.values(req.body).every(v => v || typeof v === 'boolean')) {
             res.status(400).send('Invalid Fields')
@@ -29,8 +29,8 @@ exports.postLogin = async (req, res, next) => {
             res.status(400).send('Incorrect Password') 
             return
         }
-        
-        res.status(200).send("ok")
+            
+        res.send("ok")
 
     } catch (err) {
         handleError(err)

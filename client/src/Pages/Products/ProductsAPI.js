@@ -6,7 +6,11 @@ export const GetProductsQuery = (config) => {
     return (
         useQuery(['Products', ...config.tags, config.search, config.price, config.page], () => 
             axios
-                .post(`${API_ROOT_PATH}/products`, config)
+                .post(`${API_ROOT_PATH}/products`, config, 
+                {
+                    withCredentials: true,
+                    headers: { 'Content-Type': 'application/json' },
+                })
                 .then(res => res.data)
             , 
             {

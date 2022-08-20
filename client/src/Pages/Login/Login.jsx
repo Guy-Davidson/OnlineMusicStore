@@ -24,7 +24,8 @@ const Login = () => {
 
         try {
             const res = await PostLogin(inputRef.current)
-            console.log(res)
+            const maxAge = inputRef.current.rememberMe ? 10 * 24  * 60 * 60 : 10 * 60
+            document.cookie = `loggedIn=true; Max-Age=${maxAge}`
         } catch (error) {
             setErr(error.response.data)
             setIsActive(false)

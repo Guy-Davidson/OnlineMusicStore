@@ -1,5 +1,6 @@
 const fs = require('fs').promises
 const path = require('path');
+const { v4 } = require('uuid')
 
 const handleError = (err) => {
     console.log(err);
@@ -29,6 +30,8 @@ exports.postRegister = async (req, res, next) => {
         }
 
         delete req.body.confirmPassword
+
+        req.body.id = v4()
 
         await fs.writeFile(path.resolve(__dirname, '../', 'db', 'users.json'), JSON.stringify([...data, req.body]))
         

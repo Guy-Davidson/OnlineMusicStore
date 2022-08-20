@@ -10,6 +10,8 @@ exports.postProducts = async (req, res, next) => {
     try {
         const { price, tags, search, page } = req.body
 
+        console.log(req.cookies);
+
         let data = await fs.readFile(path.resolve(__dirname, '../', 'db', 'products.json'))
         
         data = JSON.parse(data)        
