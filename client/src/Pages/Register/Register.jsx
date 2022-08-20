@@ -2,10 +2,15 @@ import styled, { css } from 'styled-components'
 import { useRef, useState } from 'react'
 import { PostRegister } from './RegisterAPI'
 import { AiOutlineCloseCircle } from 'react-icons/ai';
+import { useNavigate } from 'react-location'
+import { useRecoilState } from 'recoil';
+import { LoggedInAtom } from '../../App/AppAtoms';
 
 const Register = () => {
+    const [loggedIn, setLoggedIn] = useRecoilState(LoggedInAtom)
     const [isActive, setIsActive] = useState(false)
     const [err, setErr] = useState(null)
+    const navigate = useNavigate()
 
     const inputRef = useRef({
         userName: null,
@@ -27,7 +32,11 @@ const Register = () => {
 
         try {
             const res = await PostRegister(inputRef.current)
-            console.log(res)
+            if(res === "ok") {
+                document.cookie = `loggedIn=true; Max-Age=${10 * 60}`
+                setLoggedIn(true)
+                navigate({ to: `/` })
+            }
         } catch (error) {
             setErr(error.response.data)
             setIsActive(false)

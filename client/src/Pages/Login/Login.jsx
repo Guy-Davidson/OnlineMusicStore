@@ -2,10 +2,15 @@ import styled, { css } from 'styled-components'
 import { useRef, useState } from 'react'
 import { PostLogin } from './LoginAPI'
 import { AiOutlineCloseCircle } from 'react-icons/ai';
+import { useNavigate } from 'react-location'
+import { useRecoilState } from 'recoil';
+import { LoggedInAtom } from '../../App/AppAtoms';
 
 const Login = () => {
+    const [loggedIn, setLoggedIn] = useRecoilState(LoggedInAtom)
     const [isActive, setIsActive] = useState(false)
     const [err, setErr] = useState(null)
+    const navigate = useNavigate()
 
     const inputRef = useRef({
         userName: null,
@@ -26,6 +31,8 @@ const Login = () => {
             const res = await PostLogin(inputRef.current)
             const maxAge = inputRef.current.rememberMe ? 10 * 24  * 60 * 60 : 10 * 60
             document.cookie = `loggedIn=true; Max-Age=${maxAge}`
+            setLoggedIn(true)
+            navigate({ to: `/` })
         } catch (error) {
             setErr(error.response.data)
             setIsActive(false)

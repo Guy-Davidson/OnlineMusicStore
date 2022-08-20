@@ -8,11 +8,21 @@ import { FiLogIn } from 'react-icons/fi';
 import { BsPen } from 'react-icons/bs';
 import { AiOutlineInfoCircle, AiOutlineShoppingCart } from 'react-icons/ai';
 
-
+import { useRecoilState } from 'recoil'
+import { LoggedInAtom } from './AppAtoms'
 
 import LeftBarNav from "./LeftBarNav";
+import { useEffect } from "react";
 
 const AppLeftBar = (props) => {
+    const [loggedIn, setLoggedIn] = useRecoilState(LoggedInAtom)
+
+    useEffect(() => {
+        if(document.cookie === 'loggedIn=true') {
+            setLoggedIn(true)
+        }
+    }, [])
+
     return (
         <StyledAppLeftBar>
 
@@ -22,7 +32,7 @@ const AppLeftBar = (props) => {
             </HeaderWrapper>
 
             <TopNavWrapper>
-                {TopNavs.map(nav => {
+                {TopNavs.filter(nav => loggedIn || !nav.requiresLogIn).map(nav => {
                     return (
                         <LeftBarNav 
                             key={`LeftBarNav-${nav.name}`}
@@ -96,37 +106,44 @@ const TopNavs = [
     {
         name: 'Products',
         directTo: '/products',
-        icon: <GrProductHunt style={{marginRight: '1rem'}}/>
+        icon: <GrProductHunt style={{marginRight: '1rem'}}/>,
+        requiresLogIn: false
     },
     {
         name: 'Cart',
         directTo: '/cart',
-        icon: <AiOutlineShoppingCart style={{marginRight: '1rem'}}/>
+        icon: <AiOutlineShoppingCart style={{marginRight: '1rem'}}/>,
+        requiresLogIn: true
     },
     {
         name: 'Checkout',
         directTo: '/checkout',
-        icon: <IoBagCheckOutline style={{marginRight: '1rem'}}/>
+        icon: <IoBagCheckOutline style={{marginRight: '1rem'}}/>,
+        requiresLogIn: true
     },
     {
         name: 'MyPage1',
         directTo: '/mypage1',
-        icon: <GrProductHunt style={{marginRight: '1rem'}}/>
+        icon: <GrProductHunt style={{marginRight: '1rem'}}/>,
+        requiresLogIn: true
     },
     {
         name: 'MyPage2',
         directTo: '/mypage2',
-        icon: <GrProductHunt style={{marginRight: '1rem'}}/>
+        icon: <GrProductHunt style={{marginRight: '1rem'}}/>,
+        requiresLogIn: true
     },
     {
         name: 'MyPage3',
         directTo: '/mypage3',
-        icon: <GrProductHunt style={{marginRight: '1rem'}}/>
+        icon: <GrProductHunt style={{marginRight: '1rem'}}/>,
+        requiresLogIn: true
     },
     {
         name: 'MyPage4',
         directTo: '/mypage4',
-        icon: <GrProductHunt style={{marginRight: '1rem'}}/>
+        icon: <GrProductHunt style={{marginRight: '1rem'}}/>,
+        requiresLogIn: true
     },
 ]
 
@@ -134,22 +151,26 @@ const BottomNavs = [
     {
         name: 'Admin',
         directTo: '/admin',
-        icon: <RiAdminLine style={{marginRight: '1rem'}}/>
+        icon: <RiAdminLine style={{marginRight: '1rem'}}/>,
+        requiresLogIn: true
     },
     {
         name: 'Register',
         directTo: '/register',
-        icon: <BsPen style={{marginRight: '1rem'}}/>
+        icon: <BsPen style={{marginRight: '1rem'}}/>,
+        requiresLogIn: false
     },
     {
         name: 'Login',
         directTo: '/login',
-        icon: <FiLogIn style={{marginRight: '1rem'}}/>
+        icon: <FiLogIn style={{marginRight: '1rem'}}/>,
+        requiresLogIn: false
     },
     {
         name: 'Readme',
         directTo: '/readme',
-        icon: <AiOutlineInfoCircle style={{marginRight: '1rem'}}/>
+        icon: <AiOutlineInfoCircle style={{marginRight: '1rem'}}/>,
+        requiresLogIn: false
     },
 ]
 
