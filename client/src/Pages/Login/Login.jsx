@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components'
 import { useRef, useState } from 'react'
 import { PostLogin } from './LoginAPI'
+import { AiOutlineCloseCircle } from 'react-icons/ai';
 
 const Login = () => {
     const [isActive, setIsActive] = useState(false)
@@ -65,7 +66,7 @@ const Login = () => {
                 >
                     Login
                 </CTA>
-                {/* {err && 
+                {err && 
                     <ErrorWrapper>
                         <AiOutlineCloseCircle 
                             style={{marginRight: '1rem', color: "red"}}
@@ -73,7 +74,7 @@ const Login = () => {
                             />
                         {err}
                     </ErrorWrapper>
-                } */}
+                }
             </FormWrapper>
         </StyledLogin>
     )
@@ -152,6 +153,14 @@ const CTA = styled.div`
         }
     }}
 `
+
+const ErrorWrapper = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.6rem;        
+`   
 
 export default Login
 

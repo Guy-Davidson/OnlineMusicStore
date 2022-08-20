@@ -9,17 +9,8 @@ exports.postLogin = async (req, res, next) => {
     try {
         const { userName, password } = req.body
 
-        console.log(req.body);
-        res.send("ok")
-        return
-
-        if(!Object.values(req.body).every(v => v)) {
+        if(!Object.values(req.body).every(v => v || typeof v === 'boolean')) {
             res.status(400).send('Invalid Fields')
-            return
-        }
-
-        if(password !== confirmPassword) {
-            res.status(400).send('Passwords does not match')
             return
         }
 
@@ -27,18 +18,19 @@ exports.postLogin = async (req, res, next) => {
         
         data = JSON.parse(data)
 
-        if(data.find(user => user.userName === userName)) {
-            res.status(400).send('User already exists') 
+        const user = data.find(user => user.userName === userName)
+
+        if(!user) {
+            res.status(400).send('User not found') 
             return
         }
 
-        delete req.body.confirmPassword
-
-        await fs.writeFile(path.resolve(__dirname, '../', 'db', 'users.json'), JSON.stringify([...data, req.body]))
+        if(user.password !== password) {
+            res.status(400).send('Incorrect Password') 
+            return
+        }
         
         res.status(200).send("ok")
-
-
 
     } catch (err) {
         handleError(err)
