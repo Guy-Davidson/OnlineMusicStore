@@ -7,7 +7,7 @@ import { RiAdminLine } from 'react-icons/ri';
 import { FiLogIn } from 'react-icons/fi';
 import { BsPen } from 'react-icons/bs';
 import { AiOutlineInfoCircle, AiOutlineShoppingCart } from 'react-icons/ai';
-
+import { BsMusicNoteBeamed } from 'react-icons/bs'
 
 
 import LeftBarNav from "./LeftBarNav";
@@ -15,7 +15,7 @@ import LeftBarNav from "./LeftBarNav";
 const AppLeftBar = (props) => {
     return (
         <StyledAppLeftBar>
-
+            
             <HeaderWrapper>
                 <GiMusicSpell size={'4rem'} color={props.theme.App.fontColor.primary}/>
                 <Header>IDC <br /> Music</Header>
@@ -119,9 +119,9 @@ const TopNavs = [
         icon: <GrProductHunt style={{marginRight: '1rem'}}/>
     },
     {
-        name: 'MyPage3',
-        directTo: '/mypage3',
-        icon: <GrProductHunt style={{marginRight: '1rem'}}/>
+        name: 'Chords',
+        directTo: '/chords',
+        icon: <BsMusicNoteBeamed style={{marginRight: '1rem'}}/>
     },
     {
         name: 'Contact',

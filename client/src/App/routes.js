@@ -4,6 +4,8 @@ import { useNavigate } from 'react-location'
 import Contact from '../Pages/Contact/Contact'
 import Products from '../Pages/Products/Products'
 import Register from '../Pages/Register/Register'
+import Chords from '../Pages/Chords/Chords'
+import ChordsPage from '../Pages/Chords/ChordsPage'
 
 const Redirect = () => {
     const navigate = useNavigate()
@@ -42,9 +44,16 @@ export const routes = [
         element: <div>mypage2 Page</div>
     },
     {
-        path: '/mypage3',
-        element: <div>mypage3 Page</div>
+        path: '/chords',
+        children: [
+            { path: "/", element: <Chords /> },
+            {
+                path: ":fileName",
+                element: <ChordsPage />
+              },
+        ],
     },
+
     {
         path: '/contact',
         element: <Contact />
