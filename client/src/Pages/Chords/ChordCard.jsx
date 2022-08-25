@@ -1,15 +1,24 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 const ChordCard = (props) => {
   const { chord } = props;
 
   return (
-    <StyledChordCard>
+    <StyledChordCard className="animate pop">
       <p className="cardTitle">{chord.title}</p>
       <p className="cardAuthor">{chord.author}</p>
     </StyledChordCard>
   );
 };
+
+const AnimatedChordCard = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`;
 
 const StyledChordCard = styled.div`
   min-height: 120px;
@@ -54,6 +63,11 @@ const StyledChordCard = styled.div`
     text-overflow: ellipsis;
     white-space: nowrap;
   }
+
+  animation-duration: 0.5s;
+  animation-name: ${AnimatedChordCard};
+  animation-delay: 0.5s;
+  animation-fill-mode: backwards;
 `;
 
 export default ChordCard;
