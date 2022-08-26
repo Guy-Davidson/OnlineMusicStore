@@ -1,10 +1,19 @@
 [
     {
         "userId": "ad606363-a543-4ebb-88f0-f5fc9139347d",
-        "productsIds": [
-            "531adb84-62b4-4f8a-b0ab-b22cbcc9e65a",
-            "kpfadb84-6111-4f8a-b0ab-2j2223c9e65a",
-            "z1234ppp84-rlnd-4ffa-zzzb-korg23c9e958"
+        "products": [
+            {
+                "id": "531adb84-62b4-4f8a-b0ab-b22cbcc9e65a",
+                "quantity": 1
+            },
+            {
+                "id": "kpfadb84-6111-4f8a-b0ab-2j2223c9e65a",
+                "quantity": 1
+            },
+            {
+                "id": "z1234ppp84-rlnd-4ffa-zzzb-korg23c9e958",
+                "quantity": 1
+            }
         ]
     }
 ]

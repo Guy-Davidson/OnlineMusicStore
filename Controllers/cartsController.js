@@ -19,9 +19,15 @@ exports.getCart = async (req, res, next) => {
         
         productsData = JSON.parse(productsData)
 
-        const products = cart.productsIds.map(pId => {
-            return productsData.find(currProd => currProd.id === pId)
+        const products = cart.products.map(product => {
+            let foundProduct = productsData.find(currProd => currProd.id === product.id)
+            return {
+                product: foundProduct,
+                quantity: product.quantity
+            }
         })
+
+        console.log(products)
 
         res.send(products)
     } catch (err) {

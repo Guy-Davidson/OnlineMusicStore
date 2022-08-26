@@ -65,7 +65,6 @@ const ProductCard = (props) => {
 const StyledProductCard = styled.div`
     border-radius: 5px;
     background-color: ${props => props.theme.App.backgroundColor.card};
-    background-color: #0a0012;
     box-shadow: 2px 10px 15px 2px rgb(256,256,256, .25);
     padding: 2rem 2rem 1rem 2rem;
     display: flex;
