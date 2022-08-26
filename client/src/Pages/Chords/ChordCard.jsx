@@ -66,7 +66,7 @@ const StyledChordCard = styled.div`
 
   animation-duration: 0.5s;
   animation-name: ${AnimatedChordCard};
-  animation-delay: 0.5s;
+  animation-delay: 0.2s;
   animation-fill-mode: backwards;
 `;
 

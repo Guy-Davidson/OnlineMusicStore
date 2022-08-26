@@ -20,7 +20,6 @@ exports.getChords = async (req, res, next) => {
 
 exports.getSingleChords = async (req, res, next) => {
   try {
-    console.log("getting single chords");
     let fileData = await fs.readFile(
       path.resolve(__dirname, "../", "db", "chords", req.params.fileName)
     );

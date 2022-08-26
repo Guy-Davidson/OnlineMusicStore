@@ -2,7 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 
 import { PostContactForm } from "./ContactAPI";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 const Contact = () => {
   const {
@@ -108,8 +108,21 @@ const ContactWrapper = styled.div`
   justify-content: center;
 `;
 
+const fadeAnimation = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`;
+
 const StyledContact = styled.div`
   width: 400px;
+
+  animation-duration: 1.5s;
+  animation-name: ${fadeAnimation};
+  animation-fill-mode: backwards;
 
   form {
     display: flex;

@@ -1,5 +1,5 @@
-const express = require('express');
-const path = require('path');
+const express = require("express");
+const path = require("path");
 
 // const companiesRouter = require('./Routes/companiesRouter')
 // const stocksRouter = require('./Routes/stocksRouter')
@@ -9,10 +9,11 @@ const path = require('path');
 // const filterByRouter = require('./Routes/filterByRouter')
 // const profilePropertyRouter = require('./Routes/profilePropertyRouter')
 
-const productsRouter = require('./Routes/productsRouter')
-const contactRouter = require('./Routes/contactRouter')
-const registerRouter = require('./Routes/registerRouter')
-const chordsRouter = require('./Routes/chordsRouter')
+const productsRouter = require("./Routes/productsRouter");
+const contactRouter = require("./Routes/contactRouter");
+const registerRouter = require("./Routes/registerRouter");
+const chordsRouter = require("./Routes/chordsRouter");
+const guidesRouter = require("./Routes/guidesRouter");
 // const tabsRouter = require('./Routes/tabsRouter')
 // const recentsRouter = require('./Routes/recentsRouter')
 // const layoutsRouter = require('./Routes/layoutsRouter')
@@ -23,23 +24,24 @@ const chordsRouter = require('./Routes/chordsRouter')
 
 const app = express();
 
-app.use(express.urlencoded({extended: true}))
-app.use(express.json())
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 app.use((_, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', '*');
-    res.setHeader('Access-Control-Allow-Headers', '*');
-    next();
-  });
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "*");
+  res.setHeader("Access-Control-Allow-Headers", "*");
+  next();
+});
 
-app.use('/products', productsRouter)  
-app.use('/contact', contactRouter)
-app.use('/register', registerRouter)  
-app.use('/chords', chordsRouter)
-// app.use('/recents', recentsRouter)  
-// app.use('/layouts', layoutsRouter)  
-// app.use('/templates', templatesRouter)  
+app.use("/products", productsRouter);
+app.use("/contact", contactRouter);
+app.use("/register", registerRouter);
+app.use("/chords", chordsRouter);
+app.use("/guides", guidesRouter);
+// app.use('/recents', recentsRouter)
+// app.use('/layouts', layoutsRouter)
+// app.use('/templates', templatesRouter)
 
 // app.use('/companies', companiesRouter)
 // app.use('/stocks', stocksRouter)
@@ -52,13 +54,13 @@ app.use('/chords', chordsRouter)
 // app.use('/filings', filingsRouter)
 // app.use('/search', searchRouter)
 
-app.use(express.static(path.resolve(__dirname, 'Client', 'build')))
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, 'Client', 'build', 'index.html'))  
-})
+app.use(express.static(path.resolve(__dirname, "Client", "build")));
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "Client", "build", "index.html"));
+});
 
-const PORT = process.env.PORT || 5000
+const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`)  
-  }) 
+  console.log(`Server running on port ${PORT}`);
+});
