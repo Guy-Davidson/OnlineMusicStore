@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useRecoilState } from 'recoil'
 import { UserIdAtom } from "../../App/AppAtoms";
 
-import { GetCartQuery } from "./CartAPI";
+import { GetCartQuery} from "./CartAPI";
 import { GetUserQuery } from "../../App/MainAPI";
 
 import { useNavigate } from 'react-location'
@@ -14,8 +14,8 @@ import CartItem from "./CartItem";
 import { AiOutlineRight } from 'react-icons/ai';
 
 const Cart = () => {
-    const [userId, setUserId] = useRecoilState(UserIdAtom)
     const navigate = useNavigate()
+    const [userId, setUserId] = useRecoilState(UserIdAtom)
     const cart = GetCartQuery(userId)
     const user = GetUserQuery(userId)
 

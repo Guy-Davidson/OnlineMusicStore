@@ -24,3 +24,15 @@ export const GetCartQuery = (id) => {
         )
     )
 }
+
+export const PatchCart = (userId, productId, body) => {
+    return (
+        axios
+            .patch(`${API_ROOT_PATH}/carts?userId=${userId}&productId=${productId}`, body, 
+                {
+                    withCredentials: true,
+                    headers: { 'Content-Type': 'application/json' },
+                })
+            .then(res => res.data)
+    )
+}

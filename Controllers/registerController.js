@@ -34,6 +34,12 @@ exports.postRegister = async (req, res, next) => {
         req.body.id = v4()
 
         await fs.writeFile(path.resolve(__dirname, '../', 'db', 'users.json'), JSON.stringify([...data, req.body]))
+
+        let carts = await fs.readFile(path.resolve(__dirname, '../', 'db', 'carts.json'))
+        
+        carts = JSON.parse(carts)
+
+        await fs.writeFile(path.resolve(__dirname, '../', 'db', 'carts.json'), JSON.stringify([...carts, {userId: req.body.id, products:[]}]))
         
         res.status(200).send("ok")
 

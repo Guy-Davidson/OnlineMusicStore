@@ -2,13 +2,17 @@ import styled, { withTheme, css } from "styled-components";
 import { Link, useLocation } from 'react-location'
 
 import { useRecoilState } from 'recoil'
-import { LoggedInAtom } from './AppAtoms'
+import { LoggedInAtom, UserIdAtom } from './AppAtoms'
+
+import { GetCartQuery } from "../Pages/Cart/CartAPI";
 
 const LeftBarNav = (props) => {
     const { name, directTo, icon } = props
     const location  = useLocation() 
     const [loggedIn, setLoggedIn] = useRecoilState(LoggedInAtom)
 
+    const [userId, setUserId] = useRecoilState(UserIdAtom)
+    const cart = GetCartQuery(userId)
 
     return (
         <Link 
@@ -18,6 +22,9 @@ const LeftBarNav = (props) => {
             <StyledLeftBarNav isActive={location.current.pathname === directTo}>
                 {icon}
                 {name}
+                {name === 'Cart' && cart.isSuccess && 
+                    <CartItemsIcon>{cart.data.length}</CartItemsIcon>
+                }
             </StyledLeftBarNav>
         </Link>
     )
@@ -42,6 +49,10 @@ const StyledLeftBarNav = styled.div`
             `
         }
     }}
+`
+
+const CartItemsIcon = styled.div`
+
 `
 
 export default LeftBarNav
