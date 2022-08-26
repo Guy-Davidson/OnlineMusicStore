@@ -4,6 +4,7 @@ import { useNavigate } from 'react-location'
 import Products from '../Pages/Products/Products'
 import Register from '../Pages/Register/Register'
 import Login from '../Pages/Login/Login'
+import Cart from '../Pages/Cart/Cart'
 
 const Redirect = () => {
     const navigate = useNavigate()
@@ -27,7 +28,7 @@ export const routes = [
     },
     {
         path: '/cart',
-        element: <div>cart Page</div>
+        element: <Cart />
     },
     {
         path: '/checkout',

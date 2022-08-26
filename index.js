@@ -6,6 +6,7 @@ const productsRouter = require('./Routes/productsRouter')
 const registerRouter = require('./Routes/registerRouter')
 const loginRouter = require('./Routes/loginRouter')
 const usersRouter = require('./Routes/usersRouter')
+const cartsRouter = require('./Routes/cartsRouter')
 
 const app = express();
 
@@ -28,6 +29,7 @@ const isAuth = (req, res, next) => {
   next()
 }
 
+app.use('/carts', cartsRouter)  
 app.use('/users', usersRouter)  
 app.use('/products', productsRouter)  
 app.use('/register', registerRouter)  
