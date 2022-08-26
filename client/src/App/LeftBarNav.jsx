@@ -1,9 +1,14 @@
 import styled, { withTheme, css } from "styled-components";
 import { Link, useLocation } from 'react-location'
 
+import { useRecoilState } from 'recoil'
+import { LoggedInAtom } from './AppAtoms'
+
 const LeftBarNav = (props) => {
     const { name, directTo, icon } = props
     const location  = useLocation() 
+    const [loggedIn, setLoggedIn] = useRecoilState(LoggedInAtom)
+
 
     return (
         <Link 

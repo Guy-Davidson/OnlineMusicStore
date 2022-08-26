@@ -30,7 +30,7 @@ exports.postLogin = async (req, res, next) => {
             return
         }
             
-        res.send("ok")
+        res.send(user.id)
 
     } catch (err) {
         handleError(err)

@@ -4,10 +4,11 @@ import { PostLogin } from './LoginAPI'
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { useNavigate } from 'react-location'
 import { useRecoilState } from 'recoil';
-import { LoggedInAtom } from '../../App/AppAtoms';
+import { LoggedInAtom, UserIdAtom } from '../../App/AppAtoms';
 
 const Login = () => {
     const [loggedIn, setLoggedIn] = useRecoilState(LoggedInAtom)
+    const [userId, setUserId] = useRecoilState(UserIdAtom)
     const [isActive, setIsActive] = useState(false)
     const [err, setErr] = useState(null)
     const navigate = useNavigate()
@@ -28,9 +29,11 @@ const Login = () => {
         if(!isActive) return
 
         try {
-            const res = await PostLogin(inputRef.current)
+            const id = await PostLogin(inputRef.current)
             const maxAge = inputRef.current.rememberMe ? 10 * 24  * 60 * 60 : 10 * 60
             document.cookie = `loggedIn=true; Max-Age=${maxAge}`
+            document.cookie = `id=${id}; Max-Age=${maxAge}`
+            setUserId(id)
             setLoggedIn(true)
             navigate({ to: `/` })
         } catch (error) {

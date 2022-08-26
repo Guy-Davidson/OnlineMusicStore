@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const productsRouter = require('./Routes/productsRouter')
 const registerRouter = require('./Routes/registerRouter')
 const loginRouter = require('./Routes/loginRouter')
+const usersRouter = require('./Routes/usersRouter')
 
 const app = express();
 
@@ -20,6 +21,14 @@ app.use((_, res, next) => {
     next();
   });
 
+const isAuth = (req, res, next) => {
+  if(!req.cookies.loggedIn) {
+    res.status(401).send('bad')
+  }
+  next()
+}
+
+app.use('/users', usersRouter)  
 app.use('/products', productsRouter)  
 app.use('/register', registerRouter)  
 app.use('/login', loginRouter)  
