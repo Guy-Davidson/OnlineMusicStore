@@ -1,9 +1,30 @@
 import styled from "styled-components";
+import { useRecoilState } from 'recoil'
+import { UserIdAtom, LoggedInAtom } from "../../App/AppAtoms";
+import { PatchCart } from "../Cart/CartAPI";
+import { queryClient } from "../../App/App";
 
 import { GiGuitar, GiDrumKit, GiGrandPiano } from 'react-icons/gi';
 
+import { useNavigate } from 'react-location'
+
 const ProductCard = (props) => {
     const { product } = props
+    const navigate = useNavigate()
+
+    const [userId, setUserId] = useRecoilState(UserIdAtom)
+    const [loggedIn, setLoggedIn] = useRecoilState(LoggedInAtom)
+
+    const handleAddClick = async () => {
+        if(loggedIn) {
+            let res = await PatchCart(userId, product.id, { addProduct: true})
+            if(res === "ok") {
+                queryClient.refetchQueries(['GetCartQuery', userId])
+            }
+        } else {
+            navigate({ to: `/login` })
+        }
+    }
 
     return (
         <StyledProductCard>
@@ -54,7 +75,7 @@ const ProductCard = (props) => {
                             }
                     })}
                 </TagWrapper>
-                <CartWrapper>
+                <CartWrapper onClick={handleAddClick}>
                     Add to Cart
                 </CartWrapper>
             </FooterWrapper>            

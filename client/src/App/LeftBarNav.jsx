@@ -14,6 +14,8 @@ const LeftBarNav = (props) => {
     const [userId, setUserId] = useRecoilState(UserIdAtom)
     const cart = GetCartQuery(userId)
 
+    console.log(cart.data)
+
     return (
         <Link 
             to={props.directTo}
@@ -23,7 +25,11 @@ const LeftBarNav = (props) => {
                 {icon}
                 {name}
                 {name === 'Cart' && cart.isSuccess && 
-                    <CartItemsIcon>{cart.data.length}</CartItemsIcon>
+                    <CartItemsIcon>
+                        {cart.data.reduce((acc, curr) => {
+                            return acc + curr.quantity
+                        }, 0)}
+                        </CartItemsIcon>
                 }
             </StyledLeftBarNav>
         </Link>
@@ -52,7 +58,18 @@ const StyledLeftBarNav = styled.div`
 `
 
 const CartItemsIcon = styled.div`
-
+    border-radius: 100%;
+    border-width: 1px;
+    border-style: solid;
+    border-color: black;
+    background-color: black;
+    font-size: 1.4rem;
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 1rem;
 `
 
 export default LeftBarNav

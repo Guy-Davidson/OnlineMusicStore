@@ -67,6 +67,17 @@ exports.patchCart = async (req, res, next) => {
             }
         }
 
+        if(req.body.addProduct) {
+            if(cart.products.filter(product => product.id === productId).length) {
+                newCart = {...cart}
+            } else {
+                newCart = {
+                    userId: cart.userId,
+                    products: [...cart.products, { id: productId, quantity: 1}]
+                }
+            }
+        }
+
         data = data.map(cart => {
             if(cart.userId === userId) {
                 return newCart
