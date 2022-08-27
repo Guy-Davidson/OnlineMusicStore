@@ -21,21 +21,19 @@ const AnimatedChordCard = keyframes`
 `;
 
 const StyledChordCard = styled.div`
-  min-height: 120px;
-  max-height: 120px;
-  min-width: 400px;
-  max-width: 400px;
+  height: 13vh;
+  width: 20vw;
+  margin-right: 1vw;
+  margin-bottom: 1vh;
   display: flex;
   flex-direction: column;
   text-align: center;
   justify-content: center;
   transition: 0.6s;
-  border-radius: 5px; /* 5px rounded corners */
+  border-radius: 5px;
   color: black;
   background-color: white;
   font-family: Verdana, sans-serif;
-  margin: 1rem;
-  padding: 1% 3%;
   border-color: black;
   border-width: 1px;
   border-style: solid;
@@ -50,18 +48,17 @@ const StyledChordCard = styled.div`
 
   .cardTitle {
     font-weight: 600;
-    font-size: 22px;
+    font-size: 1vw;
   }
 
   .cardAuthor {
     font-weight: 200;
-    font-size: 12px;
+    font-size: 1vw;
   }
 
   p {
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;
   }
 
   animation-duration: 0.5s;

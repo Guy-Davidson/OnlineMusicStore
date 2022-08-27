@@ -94,6 +94,10 @@ const StyledTuner = styled.div`
       rgba(0, 0, 0, 0.8) 50%
     );
   }
+
+  area {
+    cursor: pointer;
+  }
 `;
 
 const HeaderWrapper = styled.div`
@@ -119,7 +123,6 @@ const HeaderWrapper = styled.div`
 
 const pulsate = keyframes`
     100% {
-      /* Larger blur radius */
       text-shadow:
         0 0 4px #fff,
         0 0 11px #fff,
@@ -131,7 +134,6 @@ const pulsate = keyframes`
         0 0 150px #ae00ff;
     }
     0% {
-      /* Smaller blur radius */
       text-shadow:
         0 0 2px #fff,
         0 0 4px #fff,

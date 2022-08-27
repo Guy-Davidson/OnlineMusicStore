@@ -17,7 +17,7 @@ exports.postGuides = async (req, res, next) => {
     guidesData = JSON.parse(guidesData);
     const maxPage = Math.ceil(Object.keys(guidesData).length / PAGE_SIZE);
     guidesData = guidesData.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
-    data = {
+    let data = {
       guidesData: guidesData,
       maxPage: maxPage,
     };

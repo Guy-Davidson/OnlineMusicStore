@@ -2,10 +2,11 @@ import axios from "axios";
 import { useQuery } from "react-query";
 import { API_ROOT_PATH } from "../../App/MainAPI";
 
-export const GetAllChordsQuery = () => {
+export const GetAllChordsQuery = (page) => {
   return useQuery(
-    ["Chords"],
-    () => axios.get(`${API_ROOT_PATH}/chords`).then((res) => res.data),
+    ["Chords", page],
+    () =>
+      axios.get(`${API_ROOT_PATH}/chords/page=${page}`).then((res) => res.data),
     {
       refetchOnWindowFocus: true,
       staleTime: 4000,

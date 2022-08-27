@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 
-const GuidesPagination = (props) => {
+const Pagination = (props) => {
   const { page, setPage, maxPage } = props;
 
   return (
@@ -25,7 +25,7 @@ const GuidesPagination = (props) => {
   );
 };
 
-export default GuidesPagination;
+export default Pagination;
 
 const PaginationWrapper = styled.div`
   display: flex;

@@ -2,7 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import GuideCard from "./GuideCard";
 import { GetGuidesQuery } from "./GuidesAPI";
-import GuidesPagination from "./GuidesPagination";
+import Pagination from "./GuidesPagination";
 
 const Guides = () => {
   const [page, setPage] = useState(1);
@@ -27,7 +27,7 @@ const Guides = () => {
       </GuidesListWrapper>
 
       <GuidesPaginationWrapper>
-        <GuidesPagination
+        <Pagination
           page={page}
           setPage={setPage}
           maxPage={guides.isSuccess ? guides.data.maxPage : 1}

@@ -1,5 +1,6 @@
 const fs = require("fs").promises;
 const path = require("path");
+const PAGE_SIZE = 12;
 
 const handleError = (err) => {
   console.log(err);
@@ -7,10 +8,18 @@ const handleError = (err) => {
 
 exports.getChords = async (req, res, next) => {
   try {
-    let data = await fs.readFile(
+    const page = req.params.pageNum;
+
+    let chordsData = await fs.readFile(
       path.resolve(__dirname, "../", "db", "chords.json")
     );
-    data = JSON.parse(data);
+    chordsData = JSON.parse(chordsData);
+    const maxPage = Math.ceil(Object.keys(chordsData).length / PAGE_SIZE);
+    chordsData = chordsData.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+    let data = {
+      chordsData: chordsData,
+      maxPage: maxPage,
+    };
 
     res.send(data);
   } catch (err) {
