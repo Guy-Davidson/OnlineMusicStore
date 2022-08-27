@@ -5,6 +5,7 @@ import Products from '../Pages/Products/Products'
 import Register from '../Pages/Register/Register'
 import Login from '../Pages/Login/Login'
 import Cart from '../Pages/Cart/Cart'
+import Checkout from '../Pages/Checkout/Checkout'
 
 const Redirect = () => {
     const navigate = useNavigate()
@@ -32,7 +33,7 @@ export const routes = [
     },
     {
         path: '/checkout',
-        element: <div>checkout Page</div>
+        element: <Checkout />
     },
     {
         path: '/mypage1',

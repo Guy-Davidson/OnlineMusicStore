@@ -14,8 +14,6 @@ const LeftBarNav = (props) => {
     const [userId, setUserId] = useRecoilState(UserIdAtom)
     const cart = GetCartQuery(userId)
 
-    console.log(cart.data)
-
     return (
         <Link 
             to={props.directTo}

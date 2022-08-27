@@ -10,7 +10,6 @@ import { useNavigate } from 'react-location'
 
 import CartItem from "./CartItem";
 
-
 import { AiOutlineRight } from 'react-icons/ai';
 
 const Cart = () => {

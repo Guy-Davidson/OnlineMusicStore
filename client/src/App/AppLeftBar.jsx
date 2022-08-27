@@ -196,12 +196,6 @@ const TopNavs = [
         requiresLogIn: true
     },
     {
-        name: 'Checkout',
-        directTo: '/checkout',
-        icon: <IoBagCheckOutline style={{marginRight: '1rem'}}/>,
-        requiresLogIn: true
-    },
-    {
         name: 'MyPage1',
         directTo: '/mypage1',
         icon: <GrProductHunt style={{marginRight: '1rem'}}/>,
