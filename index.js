@@ -14,6 +14,7 @@ const contactRouter = require("./Routes/contactRouter");
 const registerRouter = require("./Routes/registerRouter");
 const chordsRouter = require("./Routes/chordsRouter");
 const guidesRouter = require("./Routes/guidesRouter");
+const tunerRouter = require("./Routes/tunerRouter");
 // const tabsRouter = require('./Routes/tabsRouter')
 // const recentsRouter = require('./Routes/recentsRouter')
 // const layoutsRouter = require('./Routes/layoutsRouter')
@@ -39,6 +40,8 @@ app.use("/contact", contactRouter);
 app.use("/register", registerRouter);
 app.use("/chords", chordsRouter);
 app.use("/guides", guidesRouter);
+app.use("/tuner", tunerRouter);
+
 // app.use('/recents', recentsRouter)
 // app.use('/layouts', layoutsRouter)
 // app.use('/templates', templatesRouter)

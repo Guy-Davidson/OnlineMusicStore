@@ -1,6 +1,5 @@
 import { useState } from "react";
 import styled from "styled-components";
-import * as blueTbn from "./Bluesquare.png";
 import GuideCard from "./GuideCard";
 import { GetGuidesQuery } from "./GuidesAPI";
 import GuidesPagination from "./GuidesPagination";

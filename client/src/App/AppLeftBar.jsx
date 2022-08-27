@@ -99,8 +99,8 @@ const TopNavs = [
     icon: <IoBagCheckOutline style={{ marginRight: "1rem" }} />,
   },
   {
-    name: "MyPage1",
-    directTo: "/mypage1",
+    name: "Tuner",
+    directTo: "/tuner",
     icon: <GrProductHunt style={{ marginRight: "1rem" }} />,
   },
   {

@@ -7,6 +7,7 @@ import Register from "../Pages/Register/Register";
 import Chords from "../Pages/Chords/Chords";
 import ChordsPage from "../Pages/Chords/ChordsPage";
 import Guides from "../Pages/Guides/Guides";
+import Tuner from "../Pages/Tuner/Tuner";
 
 const Redirect = () => {
   const navigate = useNavigate();
@@ -35,8 +36,8 @@ export const routes = [
     element: <div>checkout Page</div>,
   },
   {
-    path: "/mypage1",
-    element: <div>mypage1 Page</div>,
+    path: "/tuner",
+    element: <Tuner />,
   },
   {
     path: "/guides",
