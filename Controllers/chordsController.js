@@ -1,6 +1,6 @@
 const fs = require("fs").promises;
 const path = require("path");
-const PAGE_SIZE = 12;
+const PAGE_SIZE = 10;
 
 const handleError = (err) => {
   console.log(err);

@@ -53,11 +53,11 @@ const Tuner = () => {
           onClick={() => playNote("highE")}
         />
         <area
-          alt="E"
-          title="E"
+          alt="D"
+          title="D"
           coords="59,102,29"
           shape="circle"
-          onClick={() => playNote("E")}
+          onClick={() => playNote("D")}
         />
         <area
           alt="A"
@@ -67,11 +67,11 @@ const Tuner = () => {
           onClick={() => playNote("A")}
         />
         <area
-          alt="D"
-          title="D"
+          alt="E"
+          title="E"
           coords="62,277,30"
           shape="circle"
-          onClick={() => playNote("D")}
+          onClick={() => playNote("E")}
         />
       </map>
     </StyledTuner>
