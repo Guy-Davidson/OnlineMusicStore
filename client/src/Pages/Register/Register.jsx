@@ -4,11 +4,12 @@ import { PostRegister } from './RegisterAPI'
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { useNavigate } from 'react-location'
 import { useRecoilState } from 'recoil';
-import { LoggedInAtom } from '../../App/AppAtoms';
+import { LoggedInAtom, UserIdAtom } from '../../App/AppAtoms';
 
 const Register = () => {
     const [loggedIn, setLoggedIn] = useRecoilState(LoggedInAtom)
     const [isActive, setIsActive] = useState(false)
+    const [userId, setUserId] = useRecoilState(UserIdAtom)
     const [err, setErr] = useState(null)
     const navigate = useNavigate()
 
@@ -31,9 +32,11 @@ const Register = () => {
         if(!isActive) return
 
         try {
-            const res = await PostRegister(inputRef.current)
-            if(res === "ok") {
+            const id = await PostRegister(inputRef.current)
+            if(id) {
                 document.cookie = `loggedIn=true; Max-Age=${10 * 60}`
+                document.cookie = `id=${id}; Max-Age=${10 * 60}`
+                setUserId(id)
                 setLoggedIn(true)
                 navigate({ to: `/` })
             }

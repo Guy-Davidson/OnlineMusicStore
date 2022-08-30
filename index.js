@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const productsRouter = require('./Routes/productsRouter')
 const registerRouter = require('./Routes/registerRouter')
 const loginRouter = require('./Routes/loginRouter')
+const logoutRouter = require('./Routes/logoutRouter')
 const usersRouter = require('./Routes/usersRouter')
 const cartsRouter = require('./Routes/cartsRouter')
 const purchasesRouter = require('./Routes/purchasesRouter')
@@ -36,6 +37,7 @@ app.use('/users', usersRouter)
 app.use('/products', productsRouter)  
 app.use('/register', registerRouter)  
 app.use('/login', loginRouter)  
+app.use('/logout', logoutRouter)  
 
 app.use(express.static(path.resolve(__dirname, 'Client', 'build')))
 app.get('*', (req, res) => {

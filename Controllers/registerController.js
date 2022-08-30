@@ -6,6 +6,17 @@ const handleError = (err) => {
     console.log(err);
 }
 
+const initUserData = async (userId, collection, keyName) => {
+    let data = await fs.readFile(path.resolve(__dirname, '../', 'db', `${collection}.json`))
+    
+    data = JSON.parse(data)
+
+    const initialUserData = { userId } 
+    initialUserData[`${keyName}`] = []
+
+    await fs.writeFile(path.resolve(__dirname, '../', 'db', `${collection}.json`), JSON.stringify([...data, initialUserData]))
+}
+
 exports.postRegister = async (req, res, next) => {
     try {
         const { userName, password, confirmPassword } = req.body
@@ -35,13 +46,12 @@ exports.postRegister = async (req, res, next) => {
 
         await fs.writeFile(path.resolve(__dirname, '../', 'db', 'users.json'), JSON.stringify([...data, req.body]))
 
-        let carts = await fs.readFile(path.resolve(__dirname, '../', 'db', 'carts.json'))
-        
-        carts = JSON.parse(carts)
+        await initUserData(req.body.id, 'carts', 'products')
+        await initUserData(req.body.id, 'logins', 'dates')
+        await initUserData(req.body.id, 'logouts', 'dates')
+        await initUserData(req.body.id, 'addToCart', 'products')
 
-        await fs.writeFile(path.resolve(__dirname, '../', 'db', 'carts.json'), JSON.stringify([...carts, {userId: req.body.id, products:[]}]))
-        
-        res.status(200).send("ok")
+        res.status(200).send(req.body.id) 
 
     } catch (err) {
         handleError(err)

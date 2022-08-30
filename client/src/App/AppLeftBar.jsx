@@ -12,7 +12,7 @@ import { useNavigate, useLocation } from 'react-location'
 import { useRecoilState } from 'recoil'
 import { LoggedInAtom, UserIdAtom } from './AppAtoms'
 
-import { GetUserQuery } from "./MainAPI";
+import { GetUserQuery, PostLogout } from "./MainAPI";
 
 import LeftBarNav from "./LeftBarNav";
 import { useEffect } from "react";
@@ -57,7 +57,16 @@ const AppLeftBar = (props) => {
             </TopNavWrapper>            
 
             <BottomNavWrapper>
-                {BottomNavs.filter(nav => loggedIn || !nav.requiresLogIn).map(nav => {
+                {BottomNavs
+                    .filter(nav => loggedIn || !nav.requiresLogIn)
+                    .filter(nav => {
+                        if(loggedIn && nav.name === 'Admin' && user.isSuccess) {
+                            return user.data.userName === 'admin'
+                        } else {
+                            return true
+                        }
+                    })
+                    .map(nav => {
                     return (
                         <LeftBarNav 
                             key={`LeftBarNav-${nav.name}`}
@@ -89,12 +98,16 @@ const AppLeftBar = (props) => {
 
 const Logout = () => {
     const navigate = useNavigate()
+    const [userId, setUserId] = useRecoilState(UserIdAtom)
 
     return (
-        <StyledLogout onClick={() => {
-            document.cookie = `loggedIn=false; Max-Age=${1}`
-            document.cookie = `id=${null}; Max-Age=${1}`      
-            navigate({ to: `/` })
+        <StyledLogout onClick={async () => {
+            const res = await PostLogout(userId)
+            if(res === "ok") {
+                document.cookie = `loggedIn=false; Max-Age=${1}`
+                document.cookie = `id=${null}; Max-Age=${1}`      
+                navigate({ to: `/` })
+            }
         }}>
             <FiLogIn style={{marginRight: '1rem'}}/>
             Logout

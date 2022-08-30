@@ -9,7 +9,7 @@ exports.getCart = async (req, res, next) => {
     try {
         const { id } = req.query   
            
-        let data = await fs.readFile(path.resolve(__dirname, '../', 'db', 'carts.json'))
+        let data = await fs.readFile(path.resolve(__dirname, '../', 'db', 'carts.json'))        
         
         data = JSON.parse(data)
 

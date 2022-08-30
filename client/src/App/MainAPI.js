@@ -25,3 +25,15 @@ export const GetUserQuery = (id) => {
         )
     )
 }
+
+export const PostLogout = (userId) => {
+    return (        
+        axios
+            .post(`${API_ROOT_PATH}/logout`, { userId },
+            {
+                withCredentials: true,
+                headers: { 'Content-Type': 'application/json' },
+            })
+            .then(res => res.data)        
+    )
+}
