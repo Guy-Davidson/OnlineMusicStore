@@ -23,3 +23,15 @@ export const GetProductsQuery = (config) => {
         )
     )
 }
+
+export const PostAddToCart = (userId, title) => {
+    return (        
+        axios
+            .post(`${API_ROOT_PATH}/addToCart`, { userId, title },
+            {
+                withCredentials: true,
+                headers: { 'Content-Type': 'application/json' },
+            })
+            .then(res => res.data)        
+    )
+}

@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useRecoilState } from 'recoil'
 import { UserIdAtom, LoggedInAtom } from "../../App/AppAtoms";
 import { PatchCart } from "../Cart/CartAPI";
+import { PostAddToCart } from "./ProductsAPI";
 import { queryClient } from "../../App/App";
 
 import { GiGuitar, GiDrumKit, GiGrandPiano } from 'react-icons/gi';
@@ -17,8 +18,9 @@ const ProductCard = (props) => {
 
     const handleAddClick = async () => {
         if(loggedIn) {
-            let res = await PatchCart(userId, product.id, { addProduct: true})
-            if(res === "ok") {
+            let resPatch = await PatchCart(userId, product.id, { addProduct: true})
+            let resPost = await PostAddToCart(userId, product.title)
+            if(resPatch === "ok" && resPost === "ok") {
                 queryClient.refetchQueries(['GetCartQuery', userId])
             }
         } else {
