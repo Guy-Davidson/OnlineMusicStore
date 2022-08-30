@@ -6,6 +6,7 @@ import Register from '../Pages/Register/Register'
 import Login from '../Pages/Login/Login'
 import Cart from '../Pages/Cart/Cart'
 import Checkout from '../Pages/Checkout/Checkout'
+import Admin from '../Pages/Admin/Admin'
 
 const Redirect = () => {
     const navigate = useNavigate()
@@ -53,7 +54,7 @@ export const routes = [
     },
     {
         path: '/admin',
-        element: <div>admin Page</div>
+        element: <Admin />
     },
     {
         path: '/register',
