@@ -16,14 +16,14 @@ const AdminProducts = () => {
 const StyledAdminProducts = styled.div`
     height: 50vh;
     width: 100%;
-    padding: 4rem;
+    padding: 2rem;
 `
 
 const AdminProductsWrapper = styled.div`
     width: 100%;
     height: 100%;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 2fr;
     border-radius: 5px;
     background-color: ${props => props.theme.App.backgroundColor.card};
     box-shadow: 2px 10px 15px 2px rgb(256,256,256, .25);

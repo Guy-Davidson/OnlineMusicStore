@@ -35,7 +35,7 @@ const Checkout = () => {
                     {cart.isSuccess && 
                     `Total Price: ${cart.data.reduce((acc, curr) => {
                         return (
-                            acc + curr.product.price
+                            acc + parseInt(curr.product.price)
                         )
                     }, 0)}$`
                     }

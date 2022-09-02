@@ -19,7 +19,7 @@ const AdminUsers = () => {
 const StyledAdminUsers = styled.div`
     height: 50vh;
     width: 100%;
-    padding: 4rem;
+    padding: 2rem;
 `
 
 const AdminUsersWrapper = styled.div`

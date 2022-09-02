@@ -39,6 +39,7 @@ const AdminProductsList = () => {
 }
 
 const StyledAdminProductsList = styled.div`
+    height: 35vh;
     overflow-y: auto;
     
     ::-webkit-scrollbar {            

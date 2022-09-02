@@ -92,9 +92,27 @@ const AdminProductsAdd = () => {
 }
 
 const StyledAdminProductsAdd = styled.div`
+    height: 35vh;
     padding-left: 2rem;
     display: grid;
     grid-template-columns: 1fr 1fr;
+    overflow-y: auto;
+    
+    ::-webkit-scrollbar {            
+        width: 7px;                
+        height: 7px;        
+
+    }
+
+    ::-webkit-scrollbar-track {
+            background-color: transparent;                 
+            border-radius: 10px;                
+    }
+
+    ::-webkit-scrollbar-thumb {                
+            background-color: ${props => props.theme.App.backgroundColor.secondary};
+            border-radius: 10px;
+    }
 `
 
 const LeftWrapper = styled.div`
