@@ -13,6 +13,8 @@ import Chords from "../Pages/Chords/Chords";
 import ChordsPage from "../Pages/Chords/ChordsPage";
 import Guides from "../Pages/Guides/Guides";
 import Tuner from "../Pages/Tuner/Tuner";
+import Readme from "../Pages/Readme/Readme";
+import PrivateRoute from './PrivateRoute'
 
 const Redirect = () => {
     const navigate = useNavigate()
@@ -36,48 +38,49 @@ export const routes = [
     },
     {
         path: '/cart',
-        element: <Cart />
+        element: <PrivateRoute><Cart /></PrivateRoute>
     },
     {
         path: '/checkout',
-        element: <Checkout />
+        element: <PrivateRoute><Checkout /></PrivateRoute>
     },
     {
         path: "/tuner",
-        element: <Tuner />,
+        element: <PrivateRoute><Tuner /></PrivateRoute>,
     },
     {
     path: "/guides",
-    element: <Guides />,
-    },
-    {
-        path: "/chords",
-        children: [
-          { path: "/", element: <Chords /> },
-          {
-            path: ":fileName",
-            element: <ChordsPage />,
-          },
-        ],
-    },
-    {
-        path: "/contact",
-        element: <Contact />,
-    },
-    {
-        path: '/admin',
-        element: <Admin />
-    },
-    {
-        path: '/register',
-        element: <Register />
-    },
-    {
-        path: '/login',
-        element: <Login />
-    },
-    {
-        path: '/readme',
-        element: <div>Readme Page</div>
-    },
-]
+    element: <PrivateRoute><Guides /></PrivateRoute>,
+  },
+  {
+    path: "/chords",
+    children: [
+      { path: "/", element: <PrivateRoute><Chords /></PrivateRoute>},
+      {
+        path: ":fileName",
+        element: <PrivateRoute><ChordsPage /></PrivateRoute>,
+      },
+    ],
+  },
+
+  {
+    path: "/contact",
+    element: <PrivateRoute><Contact /></PrivateRoute>,
+  },
+  {
+    path: "/admin",
+    element: <PrivateRoute><Admin /></PrivateRoute>
+  },
+  {
+    path: "/register",
+    element: <Register />,
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/readme",
+    element: <Readme />,
+  },
+];
