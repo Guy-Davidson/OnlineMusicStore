@@ -11,6 +11,11 @@ const cartsRouter = require('./Routes/cartsRouter')
 const addToCartRouter = require('./Routes/addToCartRouter')
 const purchasesRouter = require('./Routes/purchasesRouter')
 
+const chordsRouter = require("./Routes/chordsRouter");
+const guidesRouter = require("./Routes/guidesRouter");
+const tunerRouter = require("./Routes/tunerRouter");
+const contactRouter = require("./Routes/contactRouter");
+
 const app = express();
 
 app.use(express.urlencoded({extended: true}))
@@ -33,6 +38,11 @@ app.use('/products', productsRouter)
 app.use('/register', registerRouter)  
 app.use('/login', loginRouter)  
 app.use('/logout', logoutRouter)  
+
+app.use("/chords", chordsRouter);
+app.use("/guides", guidesRouter);
+app.use("/tuner", tunerRouter);
+app.use("/contact", contactRouter);
 
 app.use(express.static(path.resolve(__dirname, 'Client', 'build')))
 app.get('*', (req, res) => {
