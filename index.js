@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
+const limitter = require('express-rate-limit')
 
 const productsRouter = require('./Routes/productsRouter')
 const registerRouter = require('./Routes/registerRouter')
@@ -21,6 +22,10 @@ const app = express();
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 app.use(cookieParser());
+app.use(limitter({
+  window: 1000,
+  max: 100
+}))
 
 app.use((_, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
