@@ -26,9 +26,29 @@ exports.postProducts = async (req, res, next) => {
             data = data.sort((a,b) => b.price - a.price)
         }
 
-        data = data.slice((page - 1) * PAGE_SIZE, (page) * PAGE_SIZE)
+        if(page > 0) {
+            data = data.slice((page - 1) * PAGE_SIZE, (page) * PAGE_SIZE)
+        }        
 
         res.send(data)
+    } catch (err) {
+        handleError(err)
+    }
+}
+
+exports.deleteProduct = async (req, res, next) => {
+    try {
+        const { id } = req.query
+
+        let data = await fs.readFile(path.resolve(__dirname, '../', 'db', 'products.json'))
+        
+        data = JSON.parse(data)        
+        
+        data = data.filter(product => product.id !== id)
+
+        await fs.writeFile(path.resolve(__dirname, '../', 'db', 'products.json'), JSON.stringify(data))
+
+        res.send("ok")
     } catch (err) {
         handleError(err)
     }

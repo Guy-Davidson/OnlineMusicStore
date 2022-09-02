@@ -6,6 +6,6 @@ const productsController = require('../Controllers/productsController')
 
 route.post('/', productsController.postProducts)
 
-// route.post('/', recentsController.postRecents)
+route.delete('/', productsController.deleteProduct)
 
 module.exports = route;

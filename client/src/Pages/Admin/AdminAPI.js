@@ -88,3 +88,15 @@ export const GetAddToCartQuery = (userId) => {
         )
     )
 }
+
+export const DeleteProduct = (id) => {
+    return (        
+        axios
+            .delete(`${API_ROOT_PATH}/products?id=${id}`, 
+            {
+                withCredentials: true,
+                headers: { 'Content-Type': 'application/json' },
+            })
+            .then(res => res.data)        
+    )
+}
