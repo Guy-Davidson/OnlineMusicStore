@@ -2,6 +2,7 @@ import styled, {css} from 'styled-components'
 import { useRef, useState } from 'react'
 import { PostProduct } from './AdminAPI'
 import { queryClient } from "../../App/App";
+import  ImageEditor  from './ImageEditor'
 
 const AdminProductsAdd = () => {
     const [isActive, setIsActive] = useState(false)
@@ -12,6 +13,7 @@ const AdminProductsAdd = () => {
         desc: null,
         price: null,
         tag: null,
+        url: null
     })
 
     const config = {
@@ -44,42 +46,63 @@ const AdminProductsAdd = () => {
         }
     }
 
+    const setUrl = (data) => {
+        inputRef.current["url"] = data
+        getIsActive() 
+    }
+
     return (
         <StyledAdminProductsAdd>
-            <Header>Add Product</Header>
-            <FormWrapper>
-                {fields.map(field => {
-                    return (
-                        <InputWrapper key={field.id}>
-                            <Title>{field.title}</Title>
-                            <Input 
-                                onChange={(e) => {
-                                    inputRef.current[field.name] = e.target.value
-                                    getIsActive() 
-                                }}
-                                type={field.type}
-                            />
-                        </InputWrapper>
-                    )
-                })}
-                <CTA
-                    onClick={handleCtaClick}
-                    isActive={isActive}
-                >
-                    OK
-                </CTA>
-                {confirm && 
-                    <ConfirmWrapper>
-                        Added Suuccessfuly!
-                    </ConfirmWrapper>
-                }
-            </FormWrapper>
+            <LeftWrapper>
+                <Header>Add Product</Header>
+                <FormWrapper>
+                    {fields.map(field => {
+                        return (
+                            <InputWrapper key={field.id}>
+                                <Title>{field.title}</Title>
+                                <Input 
+                                    onChange={(e) => {
+                                        inputRef.current[field.name] = e.target.value
+                                        getIsActive() 
+                                    }}
+                                    type={field.type}
+                                    disabled={field.name === 'url' && inputRef.current['url']}
+                                />
+                            </InputWrapper>
+                        )
+                    })}
+                    <CTA
+                        onClick={handleCtaClick}
+                        isActive={isActive}
+                    >
+                        OK
+                    </CTA>
+                    {confirm && 
+                        <ConfirmWrapper>
+                            Added Suuccessfuly!
+                        </ConfirmWrapper>
+                    }
+                </FormWrapper>
+            </LeftWrapper>
+            <RightWrapper>
+                <ImageEditor setUrl={setUrl}/>
+            </RightWrapper>
         </StyledAdminProductsAdd>
     )
 }
 
 const StyledAdminProductsAdd = styled.div`
     padding-left: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+`
+
+const LeftWrapper = styled.div`
+
+`
+
+const RightWrapper = styled.div`
+    padding: 5rem;
 `
 
 const FormWrapper = styled.div`
@@ -168,7 +191,13 @@ const fields = [
         title: 'Tag:',
         name: 'tag',
         type: 'text'
-    }
+    },
+    {
+        id: '5',
+        title: 'url:',
+        name: 'url',
+        type: 'text'
+    },
 ]
 
 export default AdminProductsAdd
