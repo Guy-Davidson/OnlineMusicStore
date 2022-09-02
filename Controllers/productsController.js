@@ -18,7 +18,7 @@ exports.postProducts = async (req, res, next) => {
         data = data.filter(product => tags.includes(product.tag))
 
         if(search.length) {
-            data = data.filter(product => product.title.split(' ').some(word => word.toLowerCase().startsWith(search)))
+            data = data.filter(product => product.title.split(' ').some(word => word.toLowerCase().startsWith(search.toLowerCase())))
         }
 
         if(price === 'ascending') {
@@ -29,7 +29,9 @@ exports.postProducts = async (req, res, next) => {
 
         if(page > 0) {
             data = data.slice((page - 1) * PAGE_SIZE, (page) * PAGE_SIZE)
-        }        
+        }     
+        
+        console.log(data.length)
 
         res.send(data)
     } catch (err) {
