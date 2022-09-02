@@ -100,3 +100,11 @@ export const DeleteProduct = (id) => {
             .then(res => res.data)        
     )
 }
+
+export const PostProduct = (input) => {
+    return (
+        axios
+            .post(`${API_ROOT_PATH}/products/product`, input)
+            .then(res => res.data)
+    )
+}

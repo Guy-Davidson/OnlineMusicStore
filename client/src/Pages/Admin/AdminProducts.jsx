@@ -1,11 +1,13 @@
 import styled from 'styled-components'
 import AdminProductsList from './AdminProductsList'
+import AdminProductsAdd from './AdminProductAdd'
 
 const AdminProducts = () => {
     return (
         <StyledAdminProducts>
             <AdminProductsWrapper>
                 <AdminProductsList />
+                <AdminProductsAdd />
             </AdminProductsWrapper>
         </StyledAdminProducts>
     )

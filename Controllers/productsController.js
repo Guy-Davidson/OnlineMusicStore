@@ -1,5 +1,6 @@
 const fs = require('fs').promises
 const path = require('path');
+const { v4 } = require('uuid')
 const PAGE_SIZE = 4
 
 const handleError = (err) => {
@@ -45,6 +46,26 @@ exports.deleteProduct = async (req, res, next) => {
         data = JSON.parse(data)        
         
         data = data.filter(product => product.id !== id)
+
+        await fs.writeFile(path.resolve(__dirname, '../', 'db', 'products.json'), JSON.stringify(data))
+
+        res.send("ok")
+    } catch (err) {
+        handleError(err)
+    }
+}
+
+exports.postProduct = async (req, res, next) => {
+    try {
+        req.body
+
+        let data = await fs.readFile(path.resolve(__dirname, '../', 'db', 'products.json'))
+        
+        data = JSON.parse(data)     
+        
+        req.body.id = v4()
+        
+        data = [req.body, ...data]
 
         await fs.writeFile(path.resolve(__dirname, '../', 'db', 'products.json'), JSON.stringify(data))
 
