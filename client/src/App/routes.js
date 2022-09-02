@@ -8,6 +8,12 @@ import Cart from '../Pages/Cart/Cart'
 import Checkout from '../Pages/Checkout/Checkout'
 import Admin from '../Pages/Admin/Admin'
 
+import Contact from "../Pages/Contact/Contact";
+import Chords from "../Pages/Chords/Chords";
+import ChordsPage from "../Pages/Chords/ChordsPage";
+import Guides from "../Pages/Guides/Guides";
+import Tuner from "../Pages/Tuner/Tuner";
+
 const Redirect = () => {
     const navigate = useNavigate()
     useEffect(() => {
@@ -37,20 +43,26 @@ export const routes = [
         element: <Checkout />
     },
     {
-        path: '/mypage1',
-        element: <div>mypage1 Page</div>
+        path: "/tuner",
+        element: <Tuner />,
     },
     {
-        path: '/mypage2',
-        element: <div>mypage2 Page</div>
+    path: "/guides",
+    element: <Guides />,
     },
     {
-        path: '/mypage3',
-        element: <div>mypage3 Page</div>
+        path: "/chords",
+        children: [
+          { path: "/", element: <Chords /> },
+          {
+            path: ":fileName",
+            element: <ChordsPage />,
+          },
+        ],
     },
     {
-        path: '/mypage4',
-        element: <div>mypage4 Page</div>
+        path: "/contact",
+        element: <Contact />,
     },
     {
         path: '/admin',

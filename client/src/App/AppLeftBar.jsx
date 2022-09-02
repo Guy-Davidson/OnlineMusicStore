@@ -1,12 +1,5 @@
 import styled, { withTheme, css } from "styled-components"
 
-import { GiMusicSpell } from 'react-icons/gi';
-import { GrProductHunt } from 'react-icons/gr';
-import { IoBagCheckOutline } from 'react-icons/io5';
-import { RiAdminLine } from 'react-icons/ri';
-import { FiLogIn } from 'react-icons/fi';
-import { BsPen } from 'react-icons/bs';
-import { AiOutlineInfoCircle, AiOutlineShoppingCart } from 'react-icons/ai';
 import { useNavigate, useLocation } from 'react-location'
 
 import { useRecoilState } from 'recoil'
@@ -16,6 +9,17 @@ import { GetUserQuery, PostLogout } from "./MainAPI";
 
 import LeftBarNav from "./LeftBarNav";
 import { useEffect } from "react";
+
+
+import { GiMusicSpell } from "react-icons/gi";
+import { GrProductHunt, GrMail } from "react-icons/gr";
+import { IoBagCheckOutline, IoSchool } from "react-icons/io5";
+import { RiAdminLine } from "react-icons/ri";
+import { FiLogIn } from "react-icons/fi";
+import { GiGuitarHead } from "react-icons/gi";
+import { BsPen } from "react-icons/bs";
+import { AiOutlineInfoCircle, AiOutlineShoppingCart } from "react-icons/ai";
+import { BsMusicNoteBeamed } from "react-icons/bs";
 
 const AppLeftBar = (props) => {
     const [loggedIn, setLoggedIn] = useRecoilState(LoggedInAtom)
@@ -209,29 +213,29 @@ const TopNavs = [
         requiresLogIn: true
     },
     {
-        name: 'MyPage1',
-        directTo: '/mypage1',
-        icon: <GrProductHunt style={{marginRight: '1rem'}}/>,
+        name: "Tuner",
+        directTo: "/tuner",
+        icon: <GiGuitarHead style={{ marginRight: "1rem" }} />,
         requiresLogIn: true
     },
     {
-        name: 'MyPage2',
-        directTo: '/mypage2',
-        icon: <GrProductHunt style={{marginRight: '1rem'}}/>,
+        name: "Guides",
+        directTo: "/guides",
+        icon: <IoSchool style={{ marginRight: "1rem" }} />,
         requiresLogIn: true
     },
     {
-        name: 'MyPage3',
-        directTo: '/mypage3',
-        icon: <GrProductHunt style={{marginRight: '1rem'}}/>,
+        name: "Chords",
+        directTo: "/chords",
+        icon: <BsMusicNoteBeamed style={{ marginRight: "1rem" }} />,
         requiresLogIn: true
     },
     {
-        name: 'MyPage4',
-        directTo: '/mypage4',
-        icon: <GrProductHunt style={{marginRight: '1rem'}}/>,
+        name: "Contact",
+        directTo: "/contact",
+        icon: <GrMail style={{ marginRight: "1rem" }} />,
         requiresLogIn: true
-    },
+    }
 ]
 
 const BottomNavs = [
