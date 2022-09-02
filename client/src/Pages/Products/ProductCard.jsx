@@ -44,6 +44,9 @@ const ProductCard = (props) => {
                             src = "https://www.rech-cymbals.com.au/wp-content/uploads/2019/05/Force-White-1618x1240.png"
                             break
                         }
+                    if(product.url) {
+                        src = product.url
+                    }
                     return (
                         <ProductImage 
                             key={`img-${product.id}`}

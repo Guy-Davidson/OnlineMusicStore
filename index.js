@@ -25,13 +25,6 @@ app.use((_, res, next) => {
     next();
   });
 
-const isAuth = (req, res, next) => {
-  if(!req.cookies.loggedIn) {
-    res.status(401).send('bad')
-  }
-  next()
-}
-
 app.use('/purchases', purchasesRouter)  
 app.use('/carts', cartsRouter)  
 app.use('/addToCart', addToCartRouter)  
