@@ -5,6 +5,23 @@ const handleError = (err) => {
     console.log(err);
 }
 
+exports.getUserLogouts = async (req, res, next) => {
+    try {
+        const { userId } = req.query   
+
+        let data = await fs.readFile(path.resolve(__dirname, '../', 'db', 'logouts.json'))        
+        
+        data = JSON.parse(data)
+
+        const userLogouts = data.find(userLogout => userLogout.userId === userId)
+
+        res.send(userLogouts.dates)
+        
+    } catch (error) {
+        handleError(err)
+    }
+}
+
 exports.postLogout = async (req, res, next) => {
     try {
         const { userId } = req.body     

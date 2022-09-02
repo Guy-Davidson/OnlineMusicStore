@@ -5,6 +5,23 @@ const handleError = (err) => {
     console.log(err);
 }
 
+exports.getUserLogins = async (req, res, next) => {
+    try {
+        const { userId } = req.query   
+
+        let data = await fs.readFile(path.resolve(__dirname, '../', 'db', 'logins.json'))        
+        
+        data = JSON.parse(data)
+
+        const userLogins = data.find(userLogin => userLogin.userId === userId)
+
+        res.send(userLogins.dates)
+        
+    } catch (error) {
+        handleError(err)
+    }
+}
+
 exports.postLogin = async (req, res, next) => {
     try {
         const { userName, password } = req.body        

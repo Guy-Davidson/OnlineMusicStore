@@ -6,4 +6,6 @@ const addToCartController = require('../Controllers/addToCartController')
 
 route.post('/', addToCartController.postAddToCart)
 
+route.get('/user', addToCartController.getUserAddToCart)
+
 module.exports = route;

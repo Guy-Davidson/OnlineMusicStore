@@ -1,8 +1,9 @@
 import { useState } from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { GetUsersQuery } from './AdminAPI'
 
-const AdminUsersList = () => {
+const AdminUsersList = (props) => {
+    const { featureUser, setFeatureUser } = props
     const [config, setConfig] = useState({
         search: ''        
     })
@@ -13,7 +14,11 @@ const AdminUsersList = () => {
         <StyledAdminUsersList>
             {users.isSuccess && users.data.map(user => {
                 return (
-                    <UserWrapper key={user.id}>
+                    <UserWrapper 
+                        key={user.id}
+                        isActive={featureUser === user.id}
+                        onClick={() => setFeatureUser(user.id)}
+                        >
                         {user.userName}
                     </UserWrapper>
                 )
@@ -58,6 +63,14 @@ const UserWrapper = styled.div`
     &:hover {
         box-shadow: 2px 2px 15px 2px rgb(256,256,256, .25);
     }
+
+    ${props => {
+        if(props.isActive) {
+            return css`
+                color: ${props => props.theme.App.fontColor.primary};
+            `
+        }
+    }}
 `
 
 export default AdminUsersList

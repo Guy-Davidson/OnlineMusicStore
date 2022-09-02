@@ -1,13 +1,16 @@
+import { useState } from 'react'
 import styled from 'styled-components'
 import AdminUsersList from './AdminUsersList'
 import AdminUsersFeature from './AdminUsersFeature'
 
 const AdminUsers = () => {
+    const [featureUser, setFeatureUser] = useState(null)
+
     return (
         <StyledAdminUsers>
             <AdminUsersWrapper>
-                <AdminUsersList />
-                <AdminUsersFeature />
+                <AdminUsersList featureUser={featureUser} setFeatureUser={setFeatureUser}/>
+                <AdminUsersFeature featureUser={featureUser} setFeatureUser={setFeatureUser}/>
             </AdminUsersWrapper>
         </StyledAdminUsers>
     )

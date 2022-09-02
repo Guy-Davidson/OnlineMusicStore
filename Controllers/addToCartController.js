@@ -5,6 +5,23 @@ const handleError = (err) => {
     console.log(err);
 }
 
+exports.getUserAddToCart = async (req, res, next) => {
+    try {
+        const { userId } = req.query   
+
+        let data = await fs.readFile(path.resolve(__dirname, '../', 'db', 'addToCart.json'))        
+        
+        data = JSON.parse(data)
+
+        const userAddToCarts = data.find(userAddToCart => userAddToCart.userId === userId)
+
+        res.send(userAddToCarts.products)
+
+    } catch (err) {
+        handleError(err)
+    }
+}
+
 exports.postAddToCart = async (req, res, next) => {
     try {
         const { userId, title } = req.body     
