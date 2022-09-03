@@ -7,7 +7,7 @@ const handleError = (err) => {
 exports.getCart = async (req, res, next) => {
     try {
         const { id } = req.query
-
+        
         let data = await read('carts')
 
         const cart = data.find(cart => cart.userId === id)
