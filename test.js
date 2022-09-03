@@ -101,4 +101,49 @@ describe('server routes test', () => {
 
         expect(expectedRes).toBeTruthy()
     })
+
+    it('should validate guides structure', async () => {
+        const config = {
+            page: 1
+        }
+        let guides = await axios
+            .post(`${API_ROOT_PATH}/guides`, config, 
+            {
+                withCredentials: true,
+                headers: { 'Content-Type': 'application/json' },
+            })
+            .then(res => res.data)
+
+        const values = ["title", "link","thumbnail", "creator", "desc", "id"]
+        const expectedRes = guides.guidesData.every(guide => hasValues(values, guide))
+
+        expect(expectedRes).toBeTruthy()
+    })
+
+    it('should validate chords structure', async () => {        
+        let data = await axios
+            .get(`${API_ROOT_PATH}/chords/page=1`, 
+            {
+                withCredentials: true,
+                headers: { 'Content-Type': 'application/json' },
+            })
+            .then(res => res.data)
+
+        const values = ["title", "author","file"]
+        const expectedRes = data.chordsData.every(chord => hasValues(values, chord))
+
+        expect(expectedRes).toBeTruthy()
+    })
+
+    it('should validate tuner structure', async () => {        
+        let audio = await axios
+            .get(`${API_ROOT_PATH}/tuner/a`, 
+            {
+                withCredentials: true,
+                headers: { 'Content-Type': 'application/json' },
+            })
+            .then(res => res.data)
+
+        expect(audio).toBeTruthy()
+    })
 })
