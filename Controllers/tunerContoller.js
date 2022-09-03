@@ -1,5 +1,4 @@
-const fs = require("fs").promises;
-const path = require("path");
+const { readAudio } = require('../db/persist')
 
 const handleError = (err) => {
   console.log(err);
@@ -7,19 +6,9 @@ const handleError = (err) => {
 
 exports.getStringAudio = async (req, res, next) => {
   try {
-    let fileData = await fs.readFile(
-      path.resolve(
-        __dirname,
-        "../",
-        "db",
-        "tuner",
-        req.params.fileName + ".wav"
-      ),
-      "base64"
-    );
-    data = { file: "data:audio/wav;base64, " + fileData };
+    let audio = await readAudio(req.params.fileName)
 
-    res.send(data);
+    res.send(audio);
   } catch (err) {
     handleError(err);
   }

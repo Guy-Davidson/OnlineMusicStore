@@ -1,5 +1,4 @@
-const fs = require('fs').promises
-const path = require('path');
+const { read, write } = require('../db/persist')
 
 const handleError = (err) => {
     console.log(err);
@@ -7,11 +6,9 @@ const handleError = (err) => {
 
 exports.getUserAddToCart = async (req, res, next) => {
     try {
-        const { userId } = req.query   
-
-        let data = await fs.readFile(path.resolve(__dirname, '../', 'db', 'addToCart.json'))        
+        const { userId } = req.query 
         
-        data = JSON.parse(data)
+        let data = await read('addToCart')
 
         const userAddToCarts = data.find(userAddToCart => userAddToCart.userId === userId)
 
@@ -26,10 +23,8 @@ exports.postAddToCart = async (req, res, next) => {
     try {
         const { userId, title } = req.body     
         
-        let addToCarts = await fs.readFile(path.resolve(__dirname, '../', 'db', 'addToCart.json'))
+        let addToCarts = await read('addToCart')
         
-        addToCarts = JSON.parse(addToCarts)
-
         addToCarts = addToCarts.map(addToCart => {
             if(addToCart.userId === userId) {
                 return {userId: addToCart.userId, products:[...addToCart.products, title]}
@@ -38,7 +33,7 @@ exports.postAddToCart = async (req, res, next) => {
             }
         })
 
-        await fs.writeFile(path.resolve(__dirname, '../', 'db', 'addToCart.json'), JSON.stringify(addToCarts))
+        await write('addToCart', JSON.stringify(addToCarts))
             
         res.send("ok")
 

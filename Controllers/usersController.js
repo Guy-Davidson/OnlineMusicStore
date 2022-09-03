@@ -1,5 +1,4 @@
-const fs = require('fs').promises
-const path = require('path');
+const { read } = require('../db/persist')
 
 const handleError = (err) => {
     console.log(err);
@@ -9,9 +8,7 @@ exports.getUser = async (req, res, next) => {
     try {
         const { id } = req.query   
         
-        let data = await fs.readFile(path.resolve(__dirname, '../', 'db', 'users.json'))
-        
-        data = JSON.parse(data)
+        let data = await read('users')
 
         const user = data.find(user => user.id === id)
 
@@ -31,9 +28,7 @@ exports.postUsers = async (req, res, next) => {
     try {
         const { search } = req.body
 
-        let data = await fs.readFile(path.resolve(__dirname, '../', 'db', 'users.json'))
-        
-        data = JSON.parse(data)        
+        let data = await read('users')
         
         data = data.filter(user => user.userName !== 'admin')
 

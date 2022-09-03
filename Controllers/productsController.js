@@ -1,7 +1,6 @@
-const fs = require('fs').promises
-const path = require('path');
 const { v4 } = require('uuid')
 const PAGE_SIZE = 4
+const { read, write } = require('../db/persist')
 
 const handleError = (err) => {
     console.log(err);
@@ -11,9 +10,7 @@ exports.postProducts = async (req, res, next) => {
     try {
         const { price, tags, search, page } = req.body
 
-        let data = await fs.readFile(path.resolve(__dirname, '../', 'db', 'products.json'))
-        
-        data = JSON.parse(data)        
+        let data = await read('products')
         
         data = data.filter(product => tags.includes(product.tag))
 
@@ -31,8 +28,6 @@ exports.postProducts = async (req, res, next) => {
             data = data.slice((page - 1) * PAGE_SIZE, (page) * PAGE_SIZE)
         }     
         
-        console.log(data.length)
-
         res.send(data)
     } catch (err) {
         handleError(err)
@@ -42,14 +37,12 @@ exports.postProducts = async (req, res, next) => {
 exports.deleteProduct = async (req, res, next) => {
     try {
         const { id } = req.query
-
-        let data = await fs.readFile(path.resolve(__dirname, '../', 'db', 'products.json'))
         
-        data = JSON.parse(data)        
+        let data = await read('products')
         
         data = data.filter(product => product.id !== id)
 
-        await fs.writeFile(path.resolve(__dirname, '../', 'db', 'products.json'), JSON.stringify(data))
+        await write('products', JSON.stringify(data))
 
         res.send("ok")
     } catch (err) {
@@ -59,17 +52,13 @@ exports.deleteProduct = async (req, res, next) => {
 
 exports.postProduct = async (req, res, next) => {
     try {
-        req.body
-
-        let data = await fs.readFile(path.resolve(__dirname, '../', 'db', 'products.json'))
-        
-        data = JSON.parse(data)     
+        let data = await read('products')
         
         req.body.id = v4()
         
         data = [req.body, ...data]
 
-        await fs.writeFile(path.resolve(__dirname, '../', 'db', 'products.json'), JSON.stringify(data))
+        await write('products', JSON.stringify(data))
 
         res.send("ok")
     } catch (err) {

@@ -1,5 +1,4 @@
-const fs = require('fs').promises
-const path = require('path');
+const { read, write } = require('../db/persist')
 
 const handleError = (err) => {
     console.log(err);
@@ -7,18 +6,14 @@ const handleError = (err) => {
 
 exports.getCart = async (req, res, next) => {
     try {
-        const { id } = req.query   
-           
-        let data = await fs.readFile(path.resolve(__dirname, '../', 'db', 'carts.json'))        
-        
-        data = JSON.parse(data)
+        const { id } = req.query
+
+        let data = await read('carts')
 
         const cart = data.find(cart => cart.userId === id)
 
-        let productsData = await fs.readFile(path.resolve(__dirname, '../', 'db', 'products.json'))
+        let productsData = await read('products')
         
-        productsData = JSON.parse(productsData)
-
         const products = cart.products.map(product => {
             let foundProduct = productsData.find(currProd => currProd.id === product.id)
             return {
@@ -37,11 +32,10 @@ exports.patchCart = async (req, res, next) => {
     try {
         const { userId, productId } = req.query  
              
-        let data = await fs.readFile(path.resolve(__dirname, '../', 'db', 'carts.json'))
-        
-        data = JSON.parse(data)
+        let data = await read('carts')
 
         let cart = data.find(cart => cart.userId === userId)  
+
         let newCart = null    
 
         if(req.body.quantity) {
@@ -86,7 +80,8 @@ exports.patchCart = async (req, res, next) => {
             }
         })
 
-        await fs.writeFile(path.resolve(__dirname, '../', 'db', 'carts.json'), JSON.stringify(data))
+        await write('carts', JSON.stringify(data))
+
         res.send("ok")
 
     } catch (err) {

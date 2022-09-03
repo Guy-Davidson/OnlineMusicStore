@@ -1,5 +1,4 @@
-const fs = require('fs').promises
-const path = require('path');
+const { read, write } = require('../db/persist')
 
 const handleError = (err) => {
     console.log(err);
@@ -9,17 +8,13 @@ exports.postPurchase = async (req, res, next) => {
     try {
         const { userId } = req.query
 
-        let carts = await fs.readFile(path.resolve(__dirname, '../', 'db', 'carts.json'))
-        
-        carts = JSON.parse(carts)
+        let carts = await read('carts')
 
         const cart = carts.find(cart => cart.userId === userId)
 
-        let purchases = await fs.readFile(path.resolve(__dirname, '../', 'db', 'purchases.json'))
-        
-        purchases = JSON.parse(purchases)
+        let purchases = await read('purchases')
 
-        await fs.writeFile(path.resolve(__dirname, '../', 'db', 'purchases.json'), JSON.stringify([...purchases, cart]))
+        await write('purchases', JSON.stringify([...purchases, cart]))
 
         carts = carts.map(cart => {
             if(cart.userId === userId) {
@@ -29,7 +24,7 @@ exports.postPurchase = async (req, res, next) => {
             }
         })
 
-        await fs.writeFile(path.resolve(__dirname, '../', 'db', 'carts.json'), JSON.stringify(carts))
+        await write('carts', JSON.stringify(carts))
 
         res.send("ok")   
     } catch (error) {

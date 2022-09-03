@@ -1,5 +1,4 @@
-const fs = require('fs').promises
-const path = require('path');
+const { read, write } = require('../db/persist')
 
 const handleError = (err) => {
     console.log(err);
@@ -9,9 +8,7 @@ exports.getUserLogouts = async (req, res, next) => {
     try {
         const { userId } = req.query   
 
-        let data = await fs.readFile(path.resolve(__dirname, '../', 'db', 'logouts.json'))        
-        
-        data = JSON.parse(data)
+        let data = await read('logouts')
 
         const userLogouts = data.find(userLogout => userLogout.userId === userId)
 
@@ -26,9 +23,7 @@ exports.postLogout = async (req, res, next) => {
     try {
         const { userId } = req.body     
         
-        let logouts = await fs.readFile(path.resolve(__dirname, '../', 'db', 'logouts.json'))
-        
-        logouts = JSON.parse(logouts)
+        let logouts = await read('logouts')
 
         logouts = logouts.map(logout => {
             if(logout.userId === userId) {
@@ -38,7 +33,7 @@ exports.postLogout = async (req, res, next) => {
             }
         })
 
-        await fs.writeFile(path.resolve(__dirname, '../', 'db', 'logouts.json'), JSON.stringify(logouts))
+        await write('logouts', JSON.stringify(logouts))
             
         res.send("ok")
 

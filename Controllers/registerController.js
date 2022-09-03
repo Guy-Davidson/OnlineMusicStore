@@ -1,20 +1,17 @@
-const fs = require('fs').promises
-const path = require('path');
 const { v4 } = require('uuid')
+const { read, write } = require('../db/persist')
 
 const handleError = (err) => {
     console.log(err);
 }
 
 const initUserData = async (userId, collection, keyName) => {
-    let data = await fs.readFile(path.resolve(__dirname, '../', 'db', `${collection}.json`))
-    
-    data = JSON.parse(data)
+    let data = await read(collection)
 
     const initialUserData = { userId } 
     initialUserData[`${keyName}`] = []
 
-    await fs.writeFile(path.resolve(__dirname, '../', 'db', `${collection}.json`), JSON.stringify([...data, initialUserData]))
+    await write(collection, JSON.stringify([...data, initialUserData]))
 }
 
 exports.postRegister = async (req, res, next) => {
@@ -31,9 +28,7 @@ exports.postRegister = async (req, res, next) => {
             return
         }
 
-        let data = await fs.readFile(path.resolve(__dirname, '../', 'db', 'users.json'))
-        
-        data = JSON.parse(data)
+        let data = await read('users')
 
         if(data.find(user => user.userName === userName)) {
             res.status(400).send('User already exists') 
@@ -44,7 +39,7 @@ exports.postRegister = async (req, res, next) => {
 
         req.body.id = v4()
 
-        await fs.writeFile(path.resolve(__dirname, '../', 'db', 'users.json'), JSON.stringify([...data, req.body]))
+        await write('users', JSON.stringify([...data, req.body]))
 
         await initUserData(req.body.id, 'carts', 'products')
         await initUserData(req.body.id, 'logins', 'dates')

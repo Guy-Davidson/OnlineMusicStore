@@ -66,7 +66,6 @@ const AdminProductsAdd = () => {
                                         getIsActive() 
                                     }}
                                     type={field.type}
-                                    disabled={field.name === 'url' && inputRef.current['url']}
                                 />
                             </InputWrapper>
                         )
